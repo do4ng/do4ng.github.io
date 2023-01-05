@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
 import { PostData, server } from '../post/[slug]';
 
@@ -11,17 +12,16 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // Call an external API endpoint to get posts
-  const res = await fetch(`${server}/posts.json`);
-  const posts = await res.json();
+  const posts = require('../../public/posts.json');
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return { props: { posts } };
 }
 
 const Home: NextPage = ({ posts }: { posts: PostData[] }) => {
   const router = useRouter();
+  if (!router.isFallback && !posts) {
+    return <ErrorPage statusCode={404} />;
+  }
   const { slug } = router.query;
 
   posts = posts.filter((post) => post.data.tags?.includes(slug as string));

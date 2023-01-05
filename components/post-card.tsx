@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { cleanTitle, PostType } from '../pages/post/[slug]';
 
 export default function PostCard(props: { data: PostType }) {
+  if (!props) return <></>;
   return (
     <>
       <div className="post-card">

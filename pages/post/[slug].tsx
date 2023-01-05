@@ -1,10 +1,9 @@
 import Link from 'next/link';
+import posts from '../api/posts.json';
 import { useRouter } from 'next/router';
 const dev = process.env.NODE_ENV !== 'production';
 
-export const server = dev
-  ? 'http://localhost:3000'
-  : 'https://your_deployment.server.com';
+export const server = dev ? 'http://localhost:3000' : 'https://do4ng.vercel.com';
 
 export interface PostType {
   title: string;
@@ -30,12 +29,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  // Call an external API endpoint to get posts
-  const res = await fetch(`${server}/posts.json`);
-  const posts = await res.json();
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return { props: { posts } };
 }
 
