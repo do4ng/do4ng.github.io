@@ -49,7 +49,7 @@ const Post = () => {
           <div className="tags">
             {post.data.tags?.map((tag) => (
               // eslint-disable-next-line react/jsx-key
-              <a href={`/tag/${tag}`}>#{tag}</a>
+              <Link href={`/tag/${tag}`}>#{tag}</Link>
             ))}
           </div>
         </div>

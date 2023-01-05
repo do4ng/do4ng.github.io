@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import posts from './api/posts.json';
 
 export function removeArrayDup(arr: any[]): any[] {
@@ -25,9 +26,9 @@ const Home: NextPage = () => {
       <h2>Tags</h2>
       {tags.map((tag) => (
         <>
-          <a href={`/tag/${tag}`} className="tag-item">
+          <Link href={`/tag/${tag}`} className="tag-item">
             #{tag}
-          </a>
+          </Link>
         </>
       ))}
     </div>
