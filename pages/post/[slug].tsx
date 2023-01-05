@@ -18,7 +18,7 @@ export interface PostData {
   data: PostType;
 }
 
-export function cleanTitle(title: string): string {
+export function cleanTitle(title: string = ''): string {
   return title.replace(/ /g, '-').trim().toLocaleLowerCase();
 }
 
@@ -27,14 +27,18 @@ const Post = () => {
   const { slug } = router.query;
 
   const rawPost = posts.filter((value) => {
-    return cleanTitle(value.data.title) === cleanTitle(slug as string);
+    console.log(value.data);
+    return cleanTitle(value?.data?.title) === cleanTitle(slug as string);
   });
 
-  if (!rawPost) {
+  console.log(rawPost);
+  if (rawPost.length === 0) {
     return <>404</>;
   }
 
   const post = rawPost[0];
+
+  console.log(post.data);
 
   return (
     <>

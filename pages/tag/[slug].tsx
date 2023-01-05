@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
 import rawPosts from '../api/posts.json';
-import { PostData, server } from '../post/[slug]';
 
 const Home: NextPage = () => {
   let posts = rawPosts;

@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import ErrorPage from 'next/error';
 import posts from './api/posts.json';
 import PostCard from '../components/post-card';
-import { PostData, server } from './post/[slug]';
 
 const Home: NextPage = () => {
   if (!posts) {
