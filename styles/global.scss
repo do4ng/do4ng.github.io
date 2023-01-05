@@ -126,3 +126,15 @@ a:hover {
     border-radius: 999px;
   }
 }
+
+table {
+  width: 100%;
+  border: 1px solid $light-gray;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid $light-gray;
+  padding: 3px 5px;
+}
