@@ -14,9 +14,10 @@ export default function PostCard(props: { data: PostType }) {
           <div className="tags">
             {props.data.tags?.map((tag) => (
               // eslint-disable-next-line react/jsx-key
-              <a href={`/tag/${tag}`}>{tag}</a>
+              <a href={`/tag/${tag}`}>#{tag}</a>
             ))}
           </div>
+          {props.data.description}
         </div>
       </div>
     </>

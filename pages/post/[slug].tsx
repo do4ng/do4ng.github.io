@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -10,6 +11,7 @@ export interface PostType {
   date: string;
   description: string;
   tags: string[];
+  raw: string;
 }
 
 export interface PostData {
@@ -57,15 +59,24 @@ const Post = ({ posts }: { posts: Array<PostData> }) => {
         <div className="preface">
           <div className="date">{post.data.date}</div>
           <div className="title">{post.data.title}</div>
+          <div className="tags">
+            {post.data.tags?.map((tag) => (
+              // eslint-disable-next-line react/jsx-key
+              <a href={`/tag/${tag}`}>#{tag}</a>
+            ))}
+          </div>
         </div>
         <div className="post" dangerouslySetInnerHTML={{ __html: post.html }}></div>
         <div className="footer">
           <div className="edit">
             <a
-              href={`https://github.com/do4ng/do4ng.github.io/edit/main/posts/2023-01-05.md`}
+              href={`https://github.com/do4ng/do4ng.github.io/edit/main/posts/${post.data.raw}`}
             >
               Edit on Github
             </a>
+          </div>
+          <div className="back">
+            <Link href="/">Back to blog</Link>
           </div>
         </div>
       </div>
