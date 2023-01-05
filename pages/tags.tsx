@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import posts from './api/posts.json';
-import { PostData, server } from './post/[slug]';
 
 export function removeArrayDup(arr: any[]): any[] {
   let result = [];
@@ -12,11 +11,7 @@ export function removeArrayDup(arr: any[]): any[] {
   return result;
 }
 
-export async function getStaticProps({ params }) {
-  return { props: { posts } };
-}
-
-const Home: NextPage = ({ posts }: { posts: PostData[] }) => {
+const Home: NextPage = () => {
   let raw = [];
 
   posts.forEach((post) => {

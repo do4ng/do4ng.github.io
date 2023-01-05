@@ -2,21 +2,12 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
-import posts from '../api/posts.json';
+import rawPosts from '../api/posts.json';
 import { PostData, server } from '../post/[slug]';
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-}
+const Home: NextPage = () => {
+  let posts = rawPosts;
 
-export async function getStaticProps({ params }) {
-  return { props: { posts } };
-}
-
-const Home: NextPage = ({ posts }: { posts: PostData[] }) => {
   const router = useRouter();
   if (!router.isFallback && !posts) {
     return <ErrorPage statusCode={404} />;

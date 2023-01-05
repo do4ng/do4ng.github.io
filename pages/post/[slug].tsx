@@ -21,18 +21,8 @@ export interface PostData {
 export function cleanTitle(title: string): string {
   return title.replace(/ /g, '-').trim().toLocaleLowerCase();
 }
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-}
 
-export async function getStaticProps({ params }) {
-  return { props: { posts } };
-}
-
-const Post = ({ posts }: { posts: Array<PostData> }) => {
+const Post = () => {
   const router = useRouter();
   const { slug } = router.query;
 
