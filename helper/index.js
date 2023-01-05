@@ -34,7 +34,10 @@ async function main() {
     result.push(parsed);
   }
 
-  fs.writeFileSync(join(__dirname, '../pages/api/posts.json'), JSON.stringify(result));
+  fs.writeFileSync(
+    join(__dirname, '../pages/api/posts.json'),
+    JSON.stringify(result.reverse())
+  );
 }
 
 main();

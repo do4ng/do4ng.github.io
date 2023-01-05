@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
+import posts from '../api/posts.json';
 import { PostData, server } from '../post/[slug]';
 
 export async function getStaticPaths() {
@@ -12,8 +13,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const posts = require('../../public/posts.json');
-
   return { props: { posts } };
 }
 
@@ -31,7 +30,7 @@ const Home: NextPage = ({ posts }: { posts: PostData[] }) => {
       <div className="directory">
         /tag/<strong>{slug}</strong>
       </div>
-      {posts.reverse().map((post) => (
+      {posts.map((post) => (
         // eslint-disable-next-line react/jsx-key
         <PostCard data={post.data}></PostCard>
       ))}
