@@ -15,7 +15,7 @@ export async function getStaticProps({ params }) {
 const Home: NextPage = ({ posts }: { posts: PostData[] }) => {
   return (
     <>
-      {posts.map((post) => (
+      {posts.reverse().map((post) => (
         // eslint-disable-next-line react/jsx-key
         <PostCard data={post.data}></PostCard>
       ))}
