@@ -26,9 +26,9 @@ const Home: NextPage = () => {
       <h2>Tags</h2>
       {tags.map((tag) => (
         <>
-          <Link href={`/tag/${tag}`} className="tag-item">
+          <a href={`/tag/${tag}`} className="tag-item">
             #{tag}
-          </Link>
+          </a>
         </>
       ))}
     </div>
