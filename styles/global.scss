@@ -76,6 +76,7 @@ body {
   display: block;
   overflow-x: auto;
   padding: 1em;
+  line-height: 1.15rem;
   border-radius: 5px;
 }
 
@@ -83,7 +84,6 @@ code {
   font-family: Consolas, Noto Sans KR, Source Code Pro, Menlo, Monaco, Courier New,
     Nanum Gothic Coding, monospace;
   font-size: 0.85rem;
-  line-height: 1.65;
 }
 
 .no-a {
@@ -116,4 +116,13 @@ a {
 }
 a:hover {
   color: $link-blue-dark;
+}
+
+.about {
+  width: 50%;
+  margin: 75px auto;
+  text-align: center;
+  img {
+    border-radius: 999px;
+  }
 }
