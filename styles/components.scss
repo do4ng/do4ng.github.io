@@ -1,0 +1,25 @@
+.post-card {
+  width: 100%;
+  margin-top: 45px;
+  border-top: 1px solid $light-gray;
+
+  h3 {
+    margin-bottom: 0;
+    a {
+      color: $text-dark;
+      text-decoration: none;
+    }
+  }
+
+  .post-detail {
+    color: $darker-gray;
+    font-weight: 600;
+    a {
+      color: $link-blue;
+      text-decoration: none;
+    }
+    a + a {
+      padding-left: 10px;
+    }
+  }
+}

@@ -2,6 +2,7 @@
 @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css');
 
 @import 'styles/post.scss';
+@import 'styles/components.scss';
 
 html,
 body {
@@ -47,6 +48,28 @@ body {
   }
 }
 
+.tag-list {
+  width: 50%;
+  margin: 50px auto;
+  text-align: center;
+  .tag-item {
+    text-decoration: none;
+    padding: 5px;
+  }
+}
+
+.directory {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $darker-gray;
+
+  strong {
+    color: $text-dark;
+    padding-left: 3px;
+    font-size: 1.45rem;
+  }
+}
+
 // code
 
 .shiki {
@@ -86,4 +109,11 @@ h2 {
 h3 {
   font-size: 1.65em;
   margin: 1.75em 0 0.6em;
+}
+
+a {
+  color: $link-blue;
+}
+a:hover {
+  color: $link-blue-dark;
 }
