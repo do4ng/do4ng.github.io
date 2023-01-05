@@ -1,0 +1,29 @@
+.post-container {
+  margin-top: 50px;
+}
+
+.preface {
+  text-align: center;
+  padding-bottom: 35px;
+  border-bottom: 2px solid $light-gray;
+
+  .title {
+    font-weight: 700;
+    font-size: 2.25em;
+  }
+  .date {
+    color: $dark-gray;
+    font-weight: 700;
+  }
+}
+
+.post {
+  line-height: 200%;
+
+  a {
+    color: $link-blue;
+  }
+  a:hover {
+    color: $link-blue-dark;
+  }
+}

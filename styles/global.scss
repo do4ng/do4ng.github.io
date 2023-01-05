@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css');
+
+@import 'styles/post.scss';
+
+html,
+body {
+  margin: 0;
+  font-family: 'NanumSquare', 'Cabin', sans-serif;
+}
+.root {
+  width: 60%;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  justify-content: space-between;
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 1.55em;
+  }
+
+  .items {
+    font-size: 0.95em;
+    padding-top: 5px;
+    font-weight: 400;
+
+    a {
+      color: $text-blue;
+      padding-left: 15px;
+    }
+    a:hover {
+      color: $text-dark;
+      padding-left: 15px;
+    }
+  }
+}
+
+// code
+
+.shiki {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+code {
+  font-family: Consolas, Noto Sans KR, Source Code Pro, Menlo, Monaco, Courier New,
+    Nanum Gothic Coding, monospace;
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.no-a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// animation
+
+.animation,
+a {
+  transition: all ease 0.25s 0s;
+}
+.animation:hover,
+a:hover {
+  transition: all ease 0.25s 0s;
+}
+
+h2 {
+  font-size: 1.85em;
+  margin: 1.75em 0 0.6em;
+}
+h3 {
+  font-size: 1.65em;
+  margin: 1.75em 0 0.6em;
+}
