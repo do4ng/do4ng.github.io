@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "node helper/index.js && next dev",
+    "build": "node helper/index.js && next build",
+    "start": "node helper/index.js && next start",
     "lint": "next lint"
   },
   "dependencies": {
