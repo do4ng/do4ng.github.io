@@ -1,30 +1,24 @@
-import Document from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable @next/next/no-css-tags */
+import { Html, Head, Main, NextScript } from 'next/document';
 
-export default class MyDocument extends Document {
-  static async getInitialProps(ctx: any) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App: any) => (props: any) =>
-            sheet.collectStyles(<App {...props} />),
-        });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
-    }
-  }
+export default function Document() {
+  return (
+    <Html>
+      <Head>
+        <link
+          rel="preload"
+          href="/fonts/NanumSquareR.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin=""
+        />
+        <link href="/fonts/style.css" rel="stylesheet" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }

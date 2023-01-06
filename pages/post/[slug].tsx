@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import posts from '../api/posts.json';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 const dev = process.env.NODE_ENV !== 'production';
 
 export const server = dev ? 'http://localhost:3000' : 'https://do4ng.vercel.com';
@@ -27,11 +29,9 @@ const Post = () => {
   const { slug } = router.query;
 
   const rawPost = posts.filter((value) => {
-    console.log(value.data);
     return cleanTitle(value?.data?.title) === cleanTitle(slug as string);
   });
 
-  console.log(rawPost);
   if (rawPost.length === 0) {
     return <>404</>;
   }
@@ -42,6 +42,15 @@ const Post = () => {
 
   return (
     <>
+      <Head>
+        <title>{(slug as string).replace(/-/g, ' ')} - do4ng</title>
+        <meta name="author" content="do4ng"></meta>
+        <meta name="keyword" content={`${post.data.tags.join(', ')}`}></meta>
+      </Head>
+      <NextSeo
+        title={`${(slug as string).replace(/-/g, ' ')}`}
+        description={post.data.description}
+      ></NextSeo>
       <div className="post-container">
         <div className="preface">
           <div className="date">{post.data.date}</div>

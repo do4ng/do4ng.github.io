@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import ErrorPage from 'next/error';
 import posts from './api/posts.json';
 import PostCard from '../components/post-card';
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 const Home: NextPage = () => {
   if (!posts) {
@@ -11,6 +13,10 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Home - do4ng</title>
+      </Head>
+      <NextSeo description="do4ng"></NextSeo>
       {posts.map((post) => (
         // eslint-disable-next-line react/jsx-key
         <PostCard data={post.data}></PostCard>

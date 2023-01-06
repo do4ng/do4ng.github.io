@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
 import rawPosts from '../api/posts.json';
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 const Home: NextPage = () => {
   let posts = rawPosts;
@@ -17,6 +19,10 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>#{slug} - do4ng</title>
+      </Head>
+      <NextSeo title={`#${slug}`} description={slug as string}></NextSeo>
       <div className="directory">
         /tag/<strong>{slug}</strong>
       </div>
