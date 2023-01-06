@@ -9,16 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "babel-plugin-styled-components": "^2.0.7",
-    "babel-preset-next": "^1.4.0",
     "markdown-it": "^13.0.1",
     "markdown-it-meta": "^0.0.1",
     "next": "12.2.5",
+    "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.57.1",
-    "shiki": "^0.12.1",
-    "styled-components": "^5.3.6"
+    "shiki": "^0.12.1"
   },
   "devDependencies": {
     "@types/node": "18.7.14",
