@@ -13,6 +13,7 @@ export default function Document() {
           type="font/ttf"
           crossOrigin=""
         />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link href="/fonts/style.css" rel="stylesheet" />
       </Head>
       <body>
