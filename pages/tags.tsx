@@ -2,14 +2,18 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import posts from './api/posts.json';
 
-export function removeArrayDup(arr: any[]): any[] {
+export function removeArrayDup(arr: any[]) {
   let result = [];
+  const counts = {};
   arr.forEach((element) => {
     if (!result.includes(element)) {
       result.push(element);
+      counts[element] = 1;
+    } else {
+      counts[element] += 1;
     }
   });
-  return result;
+  return { result, counts };
 }
 
 const Home: NextPage = () => {
@@ -19,18 +23,21 @@ const Home: NextPage = () => {
     raw = [...raw, ...(post.data.tags || [])];
   });
 
-  const tags = removeArrayDup(raw);
+  const { result, counts } = removeArrayDup(raw);
 
   return (
     <div className="tag-list">
       <h2>Tags</h2>
-      {tags.map((tag) => (
-        <>
-          <a href={`/tag/${tag}`} className="tag-item">
-            #{tag}
-          </a>
-        </>
-      ))}
+      <div className="tag-items">
+        {result.map((tag) => (
+          <>
+            <a href={`/tag/${tag}`} className="tag-item">
+              #{tag}
+              <span className="tag-count">({counts[tag]})</span>
+            </a>
+          </>
+        ))}
+      </div>
     </div>
   );
 };

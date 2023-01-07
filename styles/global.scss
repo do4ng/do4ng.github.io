@@ -6,11 +6,18 @@ body {
   margin: 0;
   font-weight: 400;
   font-family: 'NanumSquare', sans-serif;
+  scroll-behavior: smooth;
 }
 .root {
   width: 60%;
-  max-width: 48rem;
   margin: 0 auto;
+  transition: all ease 0.25s 0s;
+}
+
+@media (max-width: 1024px) {
+  .root {
+    width: 85%;
+  }
 }
 
 .header {
@@ -47,12 +54,26 @@ body {
 }
 
 .tag-list {
-  width: 50%;
+  max-width: 60%;
+  height: auto;
   margin: 50px auto;
-  text-align: center;
+  h2 {
+    text-align: center;
+  }
+  .tag-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .tag-item {
     text-decoration: none;
     padding: 5px;
+
+    .tag-count {
+      color: $darker-gray;
+      font-size: 0.75rem;
+    }
   }
 }
 
@@ -81,7 +102,7 @@ body {
 code {
   font-family: Consolas, Noto Sans KR, Source Code Pro, Menlo, Monaco, Courier New,
     Nanum Gothic Coding, monospace;
-  font-size: 0.85rem;
+  font-size: 0.845rem;
 }
 
 .no-a {
@@ -134,5 +155,5 @@ table {
 th,
 td {
   border: 1px solid $light-gray;
-  padding: 3px 5px;
+  padding: 3px 10px;
 }

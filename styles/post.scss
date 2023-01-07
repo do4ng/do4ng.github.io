@@ -28,7 +28,7 @@
 
 .post {
   line-height: 200%;
-
+  color: $text-blue;
   ul {
     padding-left: 25px;
   }
@@ -40,6 +40,14 @@
   }
   a:hover {
     color: $link-blue-dark;
+  }
+
+  img {
+    margin: 50px auto;
+    display: block;
+    max-height: 450px;
+    text-align: center;
+    border-radius: 6px;
   }
 }
 
