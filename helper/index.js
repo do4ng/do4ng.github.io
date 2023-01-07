@@ -5,12 +5,13 @@ const markdown = require('markdown-it');
 const meta = require('markdown-it-meta');
 
 async function parseMarkdown(raw) {
-  const highlighter = await getHighlighter({ theme: 'material-default' });
+  const highlighter = await getHighlighter({ theme: 'material-palenight' });
   const md = new markdown({
     html: true,
     highlight: (code, lang) => highlighter.codeToHtml(code, { lang }),
   });
 
+  md.use(require('markdown-it-anchor'));
   md.use(meta);
 
   return {
