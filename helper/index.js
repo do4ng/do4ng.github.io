@@ -4,11 +4,10 @@ const { getHighlighter } = require('shiki');
 const markdown = require('markdown-it');
 const meta = require('markdown-it-meta');
 
-async function parseMarkdown(raw) {
-  const highlighter = await getHighlighter({ theme: 'material-palenight' });
+async function parseMarkdown(hl, raw) {
   const md = new markdown({
     html: true,
-    highlight: (code, lang) => highlighter.codeToHtml(code, { lang }),
+    highlight: (code, lang) => hl.codeToHtml(code, { lang }),
   });
 
   md.use(require('markdown-it-anchor'));
@@ -27,8 +26,10 @@ const posts = fs.readdirSync(join(__dirname, '../posts'));
 const result = [];
 
 async function main() {
+  const hl = await getHighlighter({ theme: 'material-palenight' });
   for (const post of posts) {
     const parsed = await parseMarkdown(
+      hl,
       fs.readFileSync(join(__dirname, '../posts', post)).toString()
     );
     parsed.data.raw = post;
