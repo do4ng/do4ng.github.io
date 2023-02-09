@@ -6,20 +6,22 @@ export default function PostCard(props: { data: PostType }) {
   return (
     <>
       <div className="post-card">
-        <h3>
-          <Link href={`/post/${cleanTitle(props.data.title)}`} className="no-a">
-            {props.data.title}
-          </Link>
-        </h3>
-        <div className="post-detail">
-          <div className="tags">
-            {props.data.tags?.map((tag) => (
-              // eslint-disable-next-line react/jsx-key
-              <a href={`/tag/${tag}`}>#{tag}</a>
-            ))}
-          </div>
-          {props.data.description}
-        </div>
+        <Link href={`/post/${cleanTitle(props.data.title)}`} className="no-a">
+          <button className="post-button">
+            <h3>{props.data.title}</h3>
+            <div className="post-detail">
+              {props.data.description}
+              <div className="tags">
+                {props.data.tags?.map((tag) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <Link href={`/tag/${tag}`}>
+                    <a>#{tag}</a>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </button>
+        </Link>
       </div>
     </>
   );

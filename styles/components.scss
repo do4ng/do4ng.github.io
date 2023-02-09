@@ -1,10 +1,32 @@
+.posts {
+  margin-top: 55px;
+  max-width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
 .post-card {
-  width: 100%;
-  margin-top: 45px;
-  border-top: 1px solid $light-gray;
+  flex-grow: 1;
+  max-width: 320x;
+  width: 275px;
+  height: 335px;
+  border: solid 0.5px #e9e9e9;
+  border-radius: 8px;
+  margin: 25px 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  transition: all ease 0.1s 0s;
+
+  .post-button {
+    background-color: inherit;
+    border: none;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 
   h3 {
-    margin-bottom: 0;
+    font-size: 1.15em;
     a {
       color: $text-dark;
       text-decoration: none;
@@ -13,6 +35,7 @@
 
   .post-detail {
     color: $darker-gray;
+    font-size: 0.8rem;
     font-weight: 600;
     a {
       color: $link-blue;
@@ -20,6 +43,10 @@
     }
     a + a {
       padding-left: 10px;
+    }
+
+    .tags {
+      font-size: 0.85rem;
     }
   }
 }

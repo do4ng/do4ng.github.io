@@ -8,6 +8,15 @@ body {
   font-family: 'NanumSquare', sans-serif;
   scroll-behavior: smooth;
 }
+html,
+body,
+button {
+  font-weight: 400;
+  font-family: 'NanumSquare', sans-serif;
+}
+button {
+  font-size: 1rem;
+}
 .root {
   width: 60%;
   margin: 0 auto;
@@ -17,6 +26,13 @@ body {
 @media (max-width: 1024px) {
   .root {
     width: 85%;
+  }
+  .posts {
+    display: block;
+    width: 100%;
+    .post-card {
+      width: 100%;
+    }
   }
 }
 
@@ -74,6 +90,10 @@ body {
       color: $darker-gray;
       font-size: 0.75rem;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 }
 
@@ -94,15 +114,23 @@ body {
 .shiki {
   display: block;
   overflow-x: auto;
-  padding: 1em;
+  padding: 2em;
+  margin: 30px 0;
   line-height: 1.15rem;
-  border-radius: 5px;
+  border-radius: 12px;
+}
+
+:not(pre) > code {
+  padding: 2.5px 5px;
+  color: #404680e0;
+  background-color: #eeeeee;
 }
 
 code {
   font-family: Consolas, Noto Sans KR, Source Code Pro, Menlo, Monaco, Courier New,
     Nanum Gothic Coding, monospace;
   font-size: 0.845rem;
+  border-radius: 5px;
 }
 
 .no-a {

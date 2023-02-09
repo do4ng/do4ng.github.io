@@ -26,10 +26,12 @@ const Home: NextPage = () => {
       <div className="directory">
         /tag/<strong>{slug}</strong>
       </div>
-      {posts.map((post) => (
-        // eslint-disable-next-line react/jsx-key
-        <PostCard data={post.data}></PostCard>
-      ))}
+      <div className="posts">
+        {posts.map((post) => (
+          // eslint-disable-next-line react/jsx-key
+          <PostCard data={post.data}></PostCard>
+        ))}
+      </div>
     </>
   );
 };

@@ -17,10 +17,12 @@ const Home: NextPage = () => {
         <title>Home - do4ng</title>
       </Head>
       <NextSeo description="do4ng"></NextSeo>
-      {posts.map((post) => (
-        // eslint-disable-next-line react/jsx-key
-        <PostCard data={post.data}></PostCard>
-      ))}
+      <div className="posts">
+        {posts.map((post) => (
+          // eslint-disable-next-line react/jsx-key
+          <PostCard data={post.data}></PostCard>
+        ))}
+      </div>
     </>
   );
 };

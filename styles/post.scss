@@ -34,11 +34,11 @@
   }
 
   a {
-    font-weight: 600;
     text-decoration: none;
     color: $link-blue;
   }
   a:hover {
+    text-decoration: underline;
     color: $link-blue-dark;
   }
 
