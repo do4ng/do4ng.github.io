@@ -1,18 +1,19 @@
 @import 'styles/post.scss';
 @import 'styles/components.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 html,
 body {
   margin: 0;
   font-weight: 400;
-  font-family: 'NanumSquare', sans-serif;
+  font-family: 'Inter', 'NanumSquare', sans-serif;
   scroll-behavior: smooth;
 }
 html,
 body,
 button {
   font-weight: 400;
-  font-family: 'NanumSquare', sans-serif;
+  font-family: 'Inter', 'NanumSquare', sans-serif;
 }
 button {
   font-size: 1rem;

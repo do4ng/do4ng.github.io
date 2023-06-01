@@ -1,28 +1,25 @@
 .posts {
   margin-top: 55px;
   max-width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
 }
 
 .post-card {
-  flex-grow: 1;
-  max-width: 320x;
-  width: 275px;
-  height: 335px;
-  border: solid 0.5px #e9e9e9;
-  border-radius: 8px;
-  margin: 25px 15px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  width: 90%;
+  height: 105px;
+  margin: 50px auto;
+  border-top: solid 1px #dfdfdf;
+  border-radius: 15px;
+  // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   transition: all ease 0.1s 0s;
 
   .post-button {
-    background-color: inherit;
+    background-color: #fff;
+    text-align: left;
     border: none;
     width: 100%;
     height: 100%;
     cursor: pointer;
+    padding: 15px;
   }
 
   h3 {
@@ -46,6 +43,7 @@
     }
 
     .tags {
+      padding-top: 5px;
       font-size: 0.85rem;
     }
   }

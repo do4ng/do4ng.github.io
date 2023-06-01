@@ -3,6 +3,7 @@ const { join } = require('path');
 const { getHighlighter } = require('shiki');
 const markdown = require('markdown-it');
 const meta = require('markdown-it-meta');
+const anchor = require('markdown-it-anchor');
 
 async function parseMarkdown(hl, raw) {
   const md = new markdown({
@@ -12,6 +13,10 @@ async function parseMarkdown(hl, raw) {
 
   md.use(require('markdown-it-anchor'));
   md.use(meta);
+  md.use(anchor.default, {
+    permalink: anchor.default.permalink.ariaHidden({ placement: 'before' }),
+  });
+  md.use(require('markdown-it-header-sections'));
 
   return {
     html: md.render(raw),

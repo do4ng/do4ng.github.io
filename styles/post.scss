@@ -4,7 +4,7 @@
 
 .preface {
   text-align: center;
-  padding-bottom: 35px;
+  padding-bottom: 45px;
   border-bottom: 2px solid $light-gray;
 
   .title {
@@ -27,6 +27,7 @@
 }
 
 .post {
+  margin-top: 40px;
   line-height: 200%;
   color: $text-blue;
   ul {

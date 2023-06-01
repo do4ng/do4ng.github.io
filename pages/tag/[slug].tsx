@@ -19,9 +19,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>#{slug} - do4ng</title>
-      </Head>
+      <Head>{slug ? <title>#{slug} - do4ng</title> : <></>}</Head>
       <NextSeo title={`#${slug}`} description={slug as string}></NextSeo>
       <div className="directory">
         /tag/<strong>{slug}</strong>
