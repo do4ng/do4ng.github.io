@@ -7,7 +7,7 @@ import fs from 'fs';
 import { join } from 'path';
 import { getHighlighter, BUNDLED_LANGUAGES } from 'shiki';
 
-import MaterialPalenight from '../shiki/themes/material-theme-palenight.json';
+import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
 
 import { plugin } from '../plugins/anchor';
 
