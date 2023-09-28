@@ -17,6 +17,7 @@ import { useRef, useState } from 'react';
 import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
+import { readFileSync } from 'fs';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -131,12 +132,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   try {
+    /*
     const res = await fetch(
       `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
         postList[rawPost[0]].name
       }.mdx`
     );
     const markdown = await res.text();
+    */
+
+    const markdown = readFileSync(
+      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
+    );
 
     return {
       props: {
