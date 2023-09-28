@@ -18,6 +18,7 @@ import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import { getHighlighter, setCDN } from 'shiki';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -154,11 +155,13 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
               [
                 rehypePrettyCode,
                 {
-                  theme: 'material-theme-palenight',
-                  paths: {
-                    themes: join(process.cwd(), '.next', 'shiki/themes'),
-                    languages: join(process.cwd(), '.next', 'shiki/languages'),
+                  getHighlighter: (options) => {
+                    setCDN(join(process.cwd(), '.next/shiki'));
+                    return getHighlighter({
+                      ...options,
+                    });
                   },
+                  theme: 'material-theme-palenight',
                 },
               ],
               raw,
