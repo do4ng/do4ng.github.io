@@ -1,13 +1,3 @@
----
-title: React에 SSR 적용하기
-date: '2023-02-09'
-tags:
-  - frontend
-  - ssr
-  - react
-description: next 따라하기
----
-
 보통 우리가 next와 같은 아무 프레임워크 없이 React로 앱을 만들때는 간단하게 `react`와 `react-dom`을 다운로드 받은다음에
 
 ```tsx
@@ -22,7 +12,7 @@ ReactDOM.render(<>Hello World</>, document.getElementById('app'));
 근데 `cra`로 다운로드 받은 react 탬플릿에서 `index.html` 파일을 자세하게 보면 [`<noscript />`](https://github.com/facebook/create-react-app/blob/d960b9e38c062584ff6cfb1a70e1512509a966e7/packages/cra-template/template/public/index.html#L30)태그가 있는데
 이 `<noscript />`가 하는 역할이 브라우저가 javascript 실행을 막았을 때 띄우는 것이라고 한다.
 
-근데 조금만 더 생각해보면 여기서 React는 자바스크립트가 활성화되야지만 페이지를 보여준다라는 것을 알 수 있다. (근데 사실 거의 모든 프레임워크들이 그렇다.)
+근데 조금만 더 생각해보면 여기서 React는 자바스크립트가 활성화되야지만 페이지를 보여준다라는 것을 알 수 있다.
 
 근데 이 자바스크립트 비활성화 문제는 SSR라는 것을 사용하면 어느정도 해결할 수 있다.  
 이번 포스트에서는 SSR을 구현해보도록 하겠다.

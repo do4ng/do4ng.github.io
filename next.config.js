@@ -1,13 +1,11 @@
 const { join } = require('path');
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
     includePaths: [join(__dirname, 'styles')],
     prependData: `@import "styles/_variables.scss";`,
   },
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };
-
-module.exports = nextConfig;
