@@ -13,7 +13,6 @@ import raw from 'rehype-raw';
 import { GetServerSidePropsContext } from 'next';
 
 import { useRef, useState } from 'react';
-import { parse } from 'url';
 
 import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
@@ -130,8 +129,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       },
     };
   }
-
-  const { protocol, host } = parse(ctx.req.headers.referer);
 
   try {
     const res = await fetch(
