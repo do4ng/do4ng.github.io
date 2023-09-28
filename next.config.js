@@ -20,8 +20,8 @@ module.exports = {
       new (require('copy-webpack-plugin'))({
         patterns: [
           {
-            from: 'node_modules/shiki/themes/material-theme-palenight.json',
-            to: '../shiki/theme.json',
+            from: 'node_modules/shiki',
+            to: '../shiki/',
           },
         ],
       })

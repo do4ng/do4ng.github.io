@@ -16,9 +16,20 @@ import { useRef, useState } from 'react';
 
 import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
-import theme from '../../shiki/theme.json';
 import { join } from 'path';
-import { readFileSync, readdirSync } from 'fs';
+import { readFileSync, readdir } from 'fs';
+
+const touched = { current: false };
+
+const getShikiPath = (): string => {
+  return join(process.cwd(), '/shiki');
+};
+
+const touchShikiPath = (): void => {
+  if (touched.current) return;
+  readdir(getShikiPath(), () => {});
+  touched.current = true;
+};
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -120,6 +131,7 @@ export function cleanTitle(title: string = ''): string {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  touchShikiPath();
   const rawPost = Object.keys(postList).filter((value) => {
     return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
   });
@@ -176,7 +188,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
               [
                 rehypePrettyCode,
                 {
-                  theme: theme,
+                  theme: 'material-theme-palenight',
+                  paths: {
+                    languages: `${getShikiPath()}/languages/`,
+                    themes: `${getShikiPath()}/themes/`,
+                  },
                 },
               ],
               raw,
