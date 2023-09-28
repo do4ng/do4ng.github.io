@@ -17,24 +17,9 @@ import { useRef, useState } from 'react';
 import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
-import { readFileSync, readdir } from 'fs';
+import { readFileSync } from 'fs';
 import { BUNDLED_LANGUAGES } from 'shiki';
 import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
-
-const touched = { current: false };
-
-// https://github.com/vercel/next.js/issues/52711
-// https://github.com/memos-pub/memos.pub/blob/a3babb1f149f05c43012278331f885d81f5fcfac/lib/mdx/plugins/code.ts
-
-const getShikiPath = (): string => {
-  return join(process.cwd(), '/shiki');
-};
-
-const touchShikiPath = (): void => {
-  if (touched.current) return;
-  readdir(getShikiPath(), () => {});
-  touched.current = true;
-};
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -136,9 +121,6 @@ export function cleanTitle(title: string = ''): string {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const shiki = await import('shiki');
-
-  touchShikiPath();
   const rawPost = Object.keys(postList).filter((value) => {
     return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
   });
@@ -196,13 +178,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 rehypePrettyCode,
                 {
                   theme: MaterialPalenight,
-                  getHighlighter: async (options) => {
-                    touchShikiPath();
-                    const highlighter = await shiki.getHighlighter({
-                      ...options,
-                    });
-                    return highlighter;
-                  },
                   paths: {
                     themes:
                       typeof window !== 'undefined'
