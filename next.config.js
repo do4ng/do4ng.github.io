@@ -6,12 +6,14 @@ const { join } = require('path');
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-  sassOptions: {
-    includePaths: [join(__dirname, 'styles')],
-    prependData: `@import "styles/_variables.scss";`,
-  },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  experimental: {},
+  experimental: {
+    serverComponentsExternalPackages: ['shiki', 'vscode-oniguruma'],
+  },
+  sassOptions: {
+    fiber: false,
+    includePaths: [join(__dirname, 'styles')],
+  },
   webpack(config, options) {
     config.plugins.push(
       new (require('copy-webpack-plugin'))({

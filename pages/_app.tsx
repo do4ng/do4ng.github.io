@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-page-custom-font */
+
 import '../styles/global.scss';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';

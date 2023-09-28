@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <title>About - do4ng</title>
       </Head>
       <div className="about">
-        <Image src="/metamong.jpg" width="120px" height="120px"></Image>
+        <Image src="/metamong.jpg" width="120" height="120" alt="img"></Image>
         <div style={{ marginTop: '20px' }}>Hello. I'm a student living in Korea.</div>
         <div>
           <a href="https://github.com/do4ng">github</a>
