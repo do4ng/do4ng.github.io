@@ -169,6 +169,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       },
     };
   } catch (e) {
+    console.log(e);
     return {
       props: {
         markdown: null,
@@ -191,7 +192,7 @@ const Post = ({
   const { slug } = router.query;
 
   if (markdown === null) {
-    console.log(reason);
+    console.log(JSON.stringify(reason));
     return <>404</>;
   }
 
