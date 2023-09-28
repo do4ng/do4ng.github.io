@@ -202,8 +202,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                     return highlighter;
                   },
                   paths: {
-                    languages: `${getShikiPath()}/languages/`,
-                    themes: `${getShikiPath()}/themes/`,
+                    themes:
+                      typeof window !== 'undefined'
+                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
+                        : null,
+                    wasm:
+                      typeof window !== 'undefined'
+                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/'
+                        : null,
+                    languages:
+                      typeof window !== 'undefined'
+                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
+                        : null,
                   },
                 },
               ],
