@@ -18,7 +18,6 @@ import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
 import { readFileSync, readdir } from 'fs';
-import { getHighlighter, setCDN } from 'shiki';
 
 const touched = { current: false };
 
@@ -135,6 +134,8 @@ export function cleanTitle(title: string = ''): string {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const shiki = await import('shiki');
+
   touchShikiPath();
   const rawPost = Object.keys(postList).filter((value) => {
     return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
@@ -195,7 +196,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                   theme: 'material-theme-palenight',
                   getHighlighter: async (options) => {
                     touchShikiPath();
-                    const highlighter = await getHighlighter({
+                    const highlighter = await shiki.getHighlighter({
                       ...options,
                     });
                     return highlighter;
