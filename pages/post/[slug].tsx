@@ -148,12 +148,21 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
       );
     } else {
-      const res = await fetch(
-        `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
-          postList[rawPost[0]].name
-        }.mdx`
-      );
-      markdown = await res.text();
+      try {
+        const res = await fetch(
+          `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
+            postList[rawPost[0]].name
+          }.mdx`
+        );
+        markdown = await res.text();
+      } catch (e) {
+        return {
+          props: {
+            markdown: null,
+            reason: e,
+          },
+        };
+      }
     }
 
     return {
@@ -188,18 +197,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 const Post = ({
   data,
   reason,
-  dir,
   markdown,
 }: {
   data: PostType;
-  dir: string[];
   markdown: MDXRemoteSerializeResult;
   reason: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(dir);
   console.log(reason);
   if (markdown === null) {
     return <>404</>;
