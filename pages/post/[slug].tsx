@@ -142,11 +142,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     */
 
     const markdown = readFileSync(
-      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
+      join(__dirname, 'posts', `${postList[rawPost[0]].name}.mdx`)
     );
-    const theme = readFileSync(join(process.cwd(), '.next', `theme.json`)).toString();
+    const theme = readFileSync(join(__dirname, '.next', `theme.json`)).toString();
 
-    const dir = readdirSync(join(process.cwd(), '.next'));
+    const dir = readdirSync(join(__dirname, '.next'));
 
     return {
       props: {
