@@ -14,4 +14,17 @@ module.exports = {
     fiber: false,
     includePaths: [join(__dirname, 'styles')],
   },
+  webpack(config, options) {
+    config.plugins.push(
+      new (require('copy-webpack-plugin'))({
+        patterns: [
+          {
+            from: 'node_modules/shiki/themes/material-theme-palenight.json',
+            to: 'theme.json',
+          },
+        ],
+      })
+    );
+    return config;
+  },
 };

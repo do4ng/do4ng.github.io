@@ -17,7 +17,7 @@ import { useRef, useState } from 'react';
 import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync } from 'fs';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -144,6 +144,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     const markdown = readFileSync(
       join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
     );
+    const theme = readFileSync(join(process.cwd(), '.next', `theme.json`)).toString();
 
     return {
       props: {
@@ -154,7 +155,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
               [
                 rehypePrettyCode,
                 {
-                  theme: 'material-theme-palenight',
+                  theme: JSON.parse(theme),
                 },
               ],
               raw,

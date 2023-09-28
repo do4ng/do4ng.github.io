@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         {result.map((tag) => (
           <>
             <div className="tag-item">
-              <Link href={`/tag/${tag}`}>
+              <Link href={`/tag/${tag}`} legacyBehavior>
                 <a className="tag-a">#{tag}</a>
               </Link>
               <span className="tag-count">({counts[tag]})</span>
