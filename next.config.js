@@ -15,6 +15,7 @@ module.exports = {
     includePaths: [join(__dirname, 'styles')],
   },
   webpack(config, options) {
+    config.resolve.fallback = { fs: false };
     config.plugins.push(
       new (require('copy-webpack-plugin'))({
         patterns: [
