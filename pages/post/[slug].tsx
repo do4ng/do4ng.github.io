@@ -142,9 +142,19 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     const markdown = await res.text();
     */
 
-    const markdown = readFileSync(
-      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
-    );
+    let markdown;
+    if (process.env.NODE_ENV === 'development') {
+      markdown = readFileSync(
+        join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
+      );
+    } else {
+      const res = await fetch(
+        `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
+          postList[rawPost[0]].name
+        }.mdx`
+      );
+      markdown = await res.text();
+    }
 
     return {
       props: {
@@ -166,7 +176,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       },
     };
   } catch (e) {
-    console.log(e);
     return {
       props: {
         markdown: null,
