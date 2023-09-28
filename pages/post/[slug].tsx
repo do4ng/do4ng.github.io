@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
@@ -10,16 +9,15 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import remarkGfm from 'remark-gfm';
 import rehypePrettyCode from 'rehype-pretty-code';
 import raw from 'rehype-raw';
-import { plugin } from '../../plugins/anchor';
 
 import { GetServerSidePropsContext } from 'next';
 
-import postList from './posts.json';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import { useEffect, useRef, useState } from 'react';
-import { randomInt } from 'crypto';
+import { useRef, useState } from 'react';
 import { parse } from 'url';
+
+import postList from './posts.json';
+import { plugin } from '../../plugins/anchor';
+import { join } from 'path';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -135,32 +133,55 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 
   const { protocol, host } = parse(ctx.req.headers.referer);
 
-  const res = await fetch(
-    `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
-      postList[rawPost[0]].name
-    }.mdx`
-  );
-  const markdown = await res.text();
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
+        postList[rawPost[0]].name
+      }.mdx`
+    );
+    const markdown = await res.text();
 
-  return {
-    props: {
-      markdown: await serialize(markdown, {
-        mdxOptions: {
-          remarkPlugins: [remarkGfm, plugin],
-          rehypePlugins: [[rehypePrettyCode, { theme: 'material-theme-palenight' }], raw],
-        },
-      }),
-      data: postList[rawPost[0]],
-    },
-  };
+    return {
+      props: {
+        markdown: await serialize(markdown, {
+          mdxOptions: {
+            remarkPlugins: [remarkGfm, plugin],
+            rehypePlugins: [
+              [
+                rehypePrettyCode,
+                {
+                  theme: 'material-theme-palenight',
+                  paths: {
+                    themes: join(process.cwd(), '.next', 'shiki/themes'),
+                    languages: join(process.cwd(), '.next', 'shiki/languages'),
+                  },
+                },
+              ],
+              raw,
+            ],
+          },
+        }),
+        data: postList[rawPost[0]],
+      },
+    };
+  } catch (e) {
+    return {
+      props: {
+        markdown: null,
+        reason: e,
+      },
+    };
+  }
 }
 
 const Post = ({
   data,
+  reason,
   markdown,
 }: {
   data: PostType;
   markdown: MDXRemoteSerializeResult;
+  reason: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
@@ -168,6 +189,8 @@ const Post = ({
   if (markdown === null) {
     return <>404</>;
   }
+
+  console.log(reason);
 
   return (
     <>

@@ -13,6 +13,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.5.3",
+    "copy-webpack-plugin": "^11.0.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.7",
     "markdown-it-meta": "^0.0.1",
