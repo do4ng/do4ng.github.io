@@ -1,0 +1,71 @@
+## zely
+
+파일 이름 기반으로 동작하는 백엔드 프레임워크이다
+
+[깃허브](https://github.com/zely-js/core), [문서](https://zely.netlify.app/)
+
+직접 프로젝트를 만들 수 있지만 `create-zely` 패키지를 이용하면 더욱 쉽게 만들 수 있다.
+
+```bash
+# using npx
+npx create-zely
+# using yarn
+yarn create zely
+```
+
+## asto
+
+[깃허브](https://github.com/do4ng/asto)
+
+Esbuild, Webpack 기반 Javascript/Typescript 번들러이다.
+
+```js
+const { asto } = require('asto');
+
+asto({
+  entryPoints: [
+    'src/index.ts',
+    {
+      builder: 'asset',
+      input: 'assets',
+      output: 'dist/assets',
+    },
+  ],
+});
+```
+
+기본 로더는 esbuild인데 안정성을 더 올리고 싶으면 webpack도 사용 가능하다.
+
+```bash
+npm i @asto/webpack webpack
+```
+
+설정에 `loader`만 바꿔주면 된다.
+
+```js
+const { asto } = require('asto');
+const { webpackLoader } = require('@asto/webpack');
+
+asto({
+  loader: webpackLoader(),
+});
+```
+
+근데 webpack도 마음에 안들면 직접 로더를 만들 수 있다.
+
+```ts
+import type { BuildOutput, Loader, LoaderContext } from 'asto';
+
+export function customLoader(): Loader<any> {
+  return {
+    name: 'custom-loader',
+    build: (ctx: LoaderContext<any>): BuildOutput => {
+      // ...
+    },
+  };
+}
+```
+
+타입: [packages/asto/types/loader.d.ts](https://github.com/do4ng/asto/blob/main/packages/asto/types/loader.d.ts)
+
+예시: [packages/webpack](https://github.com/do4ng/asto/tree/main/packages/webpack)

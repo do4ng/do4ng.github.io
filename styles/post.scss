@@ -9,14 +9,17 @@
 
   .title {
     font-weight: 700;
+    color: $text-100;
     font-size: 2.25em;
   }
   .date {
-    color: $dark-gray;
-    font-weight: 700;
+    color: $darker-gray;
+    font-weight: 500;
   }
   .tags {
     margin-top: 20px;
+    font-weight: 400;
+    font-size: 0.975rem;
     a {
       text-decoration: none;
     }
@@ -34,6 +37,10 @@
     padding-left: 25px;
   }
 
+  p {
+    line-height: 28px;
+  }
+
   a {
     text-decoration: none;
     color: $link-blue;
@@ -49,6 +56,25 @@
     max-height: 450px;
     text-align: center;
     border-radius: 6px;
+    width: 100%;
+  }
+
+  h2,
+  h3,
+  h4 {
+    a {
+      margin-left: -0.87em;
+      color: #fff;
+      font-weight: 500;
+      font-size: 1.55rem;
+    }
+  }
+  h2:hover,
+  h3:hover,
+  h4:hover {
+    a {
+      color: #6b68ff;
+    }
   }
 }
 
@@ -63,9 +89,9 @@
   }
 
   .edit a {
-    color: $text-dark;
-    font-size: 0.95rem;
-    font-weight: 700;
+    color: $text-200;
+    font-size: 0.85rem;
+    font-weight: 500;
     text-decoration: none;
   }
 

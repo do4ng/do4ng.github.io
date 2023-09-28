@@ -1,6 +1,6 @@
 @import 'styles/post.scss';
 @import 'styles/components.scss';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 html,
 body {
@@ -8,6 +8,10 @@ body {
   font-weight: 400;
   font-family: 'Inter', 'NanumSquare', sans-serif;
   scroll-behavior: smooth;
+  background-color: $bg-100;
+  letter-spacing: -0.5;
+  color: $text-100;
+  font-size: 16px;
 }
 html,
 body,
@@ -19,7 +23,7 @@ button {
   font-size: 1rem;
 }
 .root {
-  width: 60%;
+  width: calc(260px * 3 + 10px * 6);
   margin: 0 auto;
   transition: all ease 0.25s 0s;
 }
@@ -32,7 +36,9 @@ button {
     display: block;
     width: 100%;
     .post-card {
-      width: 100%;
+      width: 340px;
+      margin: 0 auto;
+      margin-bottom: 50px;
     }
   }
 }
@@ -51,21 +57,27 @@ button {
 
   .name {
     font-weight: 700;
-    font-size: 1.55em;
+    font-size: 1.15em;
+
+    a {
+      color: $primary-100;
+    }
   }
 
   .items {
     font-size: 0.95em;
     padding-top: 5px;
-    font-weight: 400;
+    font-weight: 500;
 
-    a {
+    i {
       color: $text-blue;
-      padding-left: 15px;
+      margin-left: 15px;
+      font-size: 1.05rem;
+      transition: all ease 0.25s 0s;
     }
-    a:hover {
-      color: $text-dark;
-      padding-left: 15px;
+    i:hover {
+      color: $primary-100;
+      cursor: pointer;
     }
   }
 }
@@ -112,26 +124,62 @@ button {
 
 // code
 
-.shiki {
+.code-block {
   display: block;
   overflow-x: auto;
-  padding: 2em;
   margin: 30px 0;
   line-height: 1.15rem;
-  border-radius: 12px;
+  border-radius: 8px;
+
+  .code-lang {
+    background-color: #1a1d29;
+    color: #7d7f8f;
+
+    padding: 0.8em 1rem 0.5rem 1rem;
+    font-size: 0.775rem;
+    border-bottom: 1px solid #383d52;
+
+    i {
+      font-size: 0.75rem;
+      margin-right: 5px;
+    }
+    button {
+      float: right;
+      background-color: inherit;
+      border: none;
+      color: #7d7f8f;
+      font-size: 0.75rem;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+    button:hover {
+      border-radius: 5px;
+      background-color: #252938;
+    }
+  }
+
+  pre {
+    margin: 0;
+    padding: 1.05em;
+    overflow: auto;
+  }
 }
 
 :not(pre) > code {
+  margin: 2px;
   padding: 2.5px 5px;
   color: #404680e0;
-  background-color: #eeeeee;
+  background-color: #eeeeeedc;
+  letter-spacing: normal;
 }
 
 code {
-  font-family: Consolas, Noto Sans KR, Source Code Pro, Menlo, Monaco, Courier New,
-    Nanum Gothic Coding, monospace;
-  font-size: 0.845rem;
-  border-radius: 5px;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.875em;
+  border-radius: 2px;
 }
 
 .no-a {
