@@ -18,6 +18,8 @@ import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
 import { readFileSync, readdir } from 'fs';
+import { BUNDLED_LANGUAGES } from 'shiki';
+import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
 
 const touched = { current: false };
 
@@ -193,7 +195,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
               [
                 rehypePrettyCode,
                 {
-                  theme: 'material-theme-palenight',
+                  theme: MaterialPalenight,
                   getHighlighter: async (options) => {
                     touchShikiPath();
                     const highlighter = await shiki.getHighlighter({
@@ -215,6 +217,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                         ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
                         : null,
                   },
+                  langs: [...BUNDLED_LANGUAGES],
                 },
               ],
               raw,
