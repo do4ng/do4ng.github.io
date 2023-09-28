@@ -3,23 +3,33 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-
-import remarkGfm from 'remark-gfm';
-import rehypePrettyCode from 'rehype-pretty-code';
-import raw from 'rehype-raw';
 
 import { GetServerSidePropsContext } from 'next';
 
 import { useRef, useState } from 'react';
 
 import postList from './posts.json';
-import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
-import { readFileSync } from 'fs';
-import { BUNDLED_LANGUAGES } from 'shiki';
-import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
+import { readFileSync, readdir } from 'fs';
+
+import { Content } from '../../mdx/content';
+import { compileMdx } from '../../mdx/compile';
+
+const touched = { current: false };
+
+// https://github.com/vercel/next.js/issues/52711
+// https://github.com/memos-pub/memos.pub/blob/a3babb1f149f05c43012278331f885d81f5fcfac/lib/mdx/plugins/code.ts
+
+const getShikiPath = (): string => {
+  return join(process.cwd(), '/shiki');
+};
+
+const touchShikiPath = (): void => {
+  if (touched.current) return;
+  readdir(getShikiPath(), () => {});
+  touched.current = true;
+};
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -46,7 +56,7 @@ const langs = {
   sh: 'Terminal',
 };
 
-const components = {
+export const components = {
   h1: (props: any) => {
     return <h1 {...props}></h1>;
   },
@@ -121,6 +131,7 @@ export function cleanTitle(title: string = ''): string {
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  touchShikiPath();
   const rawPost = Object.keys(postList).filter((value) => {
     return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
   });
@@ -147,7 +158,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     if (process.env.NODE_ENV === 'development') {
       markdown = readFileSync(
         join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
-      );
+      ).toString();
     } else {
       try {
         const res = await fetch(
@@ -156,7 +167,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
           }.mdx`
         );
         markdown = await res.text();
-        console.log(markdown);
       } catch (e) {
         console.error(e);
         return {
@@ -168,37 +178,12 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       }
     }
 
+    const compiled = await compileMdx(markdown);
+
     return {
       props: {
-        markdown: await serialize(markdown, {
-          mdxOptions: {
-            remarkPlugins: [remarkGfm, plugin],
-            rehypePlugins: [
-              [
-                rehypePrettyCode,
-                {
-                  theme: MaterialPalenight,
-                  paths: {
-                    themes:
-                      typeof window !== 'undefined'
-                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
-                        : null,
-                    wasm:
-                      typeof window !== 'undefined'
-                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/'
-                        : null,
-                    languages:
-                      typeof window !== 'undefined'
-                        ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
-                        : null,
-                  },
-                  langs: [...BUNDLED_LANGUAGES],
-                },
-              ],
-              raw,
-            ],
-          },
-        }),
+        markdown,
+        compiled,
         data: postList[rawPost[0]],
       },
     };
@@ -217,15 +202,16 @@ const Post = ({
   data,
   reason,
   markdown,
+  compiled,
 }: {
   data: PostType;
-  markdown: MDXRemoteSerializeResult;
+  markdown: string;
+  compiled: any;
   reason: string;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
 
-  console.log(reason);
   if (markdown === null) {
     return <>404</>;
   }
@@ -255,7 +241,7 @@ const Post = ({
           </div>
         </div>
         <div className="post">
-          <MDXRemote {...markdown} components={components} />
+          <Content content={compiled}></Content>
         </div>
         <div className="footer">
           <div className="edit">
