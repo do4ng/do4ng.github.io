@@ -18,8 +18,12 @@ import postList from './posts.json';
 import { plugin } from '../../plugins/anchor';
 import { join } from 'path';
 import { readFileSync, readdir } from 'fs';
+import { getHighlighter, setCDN } from 'shiki';
 
 const touched = { current: false };
+
+// https://github.com/vercel/next.js/issues/52711
+// https://github.com/memos-pub/memos.pub/blob/a3babb1f149f05c43012278331f885d81f5fcfac/lib/mdx/plugins/code.ts
 
 const getShikiPath = (): string => {
   return join(process.cwd(), '/shiki');
@@ -189,6 +193,13 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 rehypePrettyCode,
                 {
                   theme: 'material-theme-palenight',
+                  getHighlighter: async (options) => {
+                    touchShikiPath();
+                    const highlighter = await getHighlighter({
+                      ...options,
+                    });
+                    return highlighter;
+                  },
                   paths: {
                     languages: `${getShikiPath()}/languages/`,
                     themes: `${getShikiPath()}/themes/`,

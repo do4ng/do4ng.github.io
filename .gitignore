@@ -36,3 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 ./pages/api/posts.json
+
+shiki

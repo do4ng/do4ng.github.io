@@ -20,8 +20,12 @@ module.exports = {
       new (require('copy-webpack-plugin'))({
         patterns: [
           {
-            from: 'node_modules/shiki',
-            to: '../shiki/',
+            from: 'node_modules/shiki/languages',
+            to: join(__dirname, 'shiki/languages'),
+          },
+          {
+            from: 'node_modules/shiki/themes',
+            to: join(__dirname, 'shiki/themes'),
           },
         ],
       })
