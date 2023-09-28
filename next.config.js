@@ -14,12 +14,4 @@ module.exports = {
     fiber: false,
     includePaths: [join(__dirname, 'styles')],
   },
-  webpack(config, options) {
-    config.plugins.push(
-      new (require('copy-webpack-plugin'))({
-        patterns: [{ from: 'node_modules/shiki', to: 'shiki' }],
-      })
-    );
-    return config;
-  },
 };
