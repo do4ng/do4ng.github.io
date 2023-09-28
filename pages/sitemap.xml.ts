@@ -1,9 +1,9 @@
-import posts from './api/posts.json';
-import { cleanTitle, PostData } from './post/[slug]';
+import posts from './post/posts.json';
+import { cleanTitle } from './post/[slug]';
 
 const EXTERNAL_DATA_URL = 'https://do4ng.vercel.app/post';
 
-function generateSiteMap(ps: PostData[]) {
+function generateSiteMap(ps: any) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <url>
@@ -12,11 +12,11 @@ function generateSiteMap(ps: PostData[]) {
      <url>
        <loc>https://do4ng.vercel.app/about</loc>
      </url>
-     ${ps
-       .map(({ data }) => {
+     ${Object.keys(ps)
+       .map((post) => {
          return `
        <url>
-           <loc>${`${EXTERNAL_DATA_URL}/${cleanTitle(data.title)}`}</loc>
+           <loc>${`${EXTERNAL_DATA_URL}/${cleanTitle(posts[post].title)}`}</loc>
            <changefreq>daily</changefreq>
        </url>
      `;
