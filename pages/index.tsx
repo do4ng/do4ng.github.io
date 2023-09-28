@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       <div className="posts">
         {Object.keys(posts).map((post) => (
           // eslint-disable-next-line react/jsx-key
-          <PostCard data={posts[post]} key={posts[post].title}></PostCard>
+          <PostCard data={posts[post]} key={post}></PostCard>
         ))}
       </div>
     </>
