@@ -146,7 +146,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     );
     const theme = readFileSync(join(process.cwd(), '.next', `theme.json`)).toString();
 
-    const dir = readdirSync(join(process.cwd(), '.next'));
+    const dir = readdirSync(join(process.cwd()));
 
     return {
       props: {
@@ -193,9 +193,9 @@ const Post = ({
   const router = useRouter();
   const { slug } = router.query;
 
+  console.log(dir);
+  console.log(reason);
   if (markdown === null) {
-    console.log(dir);
-    console.log(reason);
     return <>404</>;
   }
 
@@ -217,7 +217,9 @@ const Post = ({
           <div className="tags">
             {data.tags?.map((tag) => (
               // eslint-disable-next-line react/jsx-key
-              <a href={`/tag/${tag}`}>#{tag}</a>
+              <a href={`/tag/${tag}`} key={tag}>
+                #{tag}
+              </a>
             ))}
           </div>
         </div>
