@@ -155,7 +155,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
           }.mdx`
         );
         markdown = await res.text();
+        console.log(markdown);
       } catch (e) {
+        console.error(e);
         return {
           props: {
             markdown: null,
@@ -185,6 +187,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       },
     };
   } catch (e) {
+    console.error(e);
     return {
       props: {
         markdown: null,
