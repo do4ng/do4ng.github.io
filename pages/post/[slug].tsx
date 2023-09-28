@@ -184,7 +184,7 @@ const Post = ({
   const { slug } = router.query;
 
   if (markdown === null) {
-    return <>404</>;
+    return <>404 - {reason}</>;
   }
 
   console.log(reason);
