@@ -194,12 +194,10 @@ const Post = ({
   const { slug } = router.query;
 
   if (markdown === null) {
-    console.log(JSON.stringify(reason));
+    console.log(dir);
+    console.log(reason);
     return <>404</>;
   }
-
-  console.log(dir);
-  console.log(reason);
 
   return (
     <>
