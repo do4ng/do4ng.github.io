@@ -146,8 +146,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     );
     const theme = readFileSync(join(process.cwd(), '.next', `theme.json`)).toString();
 
+    const dir = readdirSync(join(process.cwd(), '.next'));
+
     return {
       props: {
+        dir,
         markdown: await serialize(markdown, {
           mdxOptions: {
             remarkPlugins: [remarkGfm, plugin],
@@ -179,9 +182,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 const Post = ({
   data,
   reason,
+  dir,
   markdown,
 }: {
   data: PostType;
+  dir: string[];
   markdown: MDXRemoteSerializeResult;
   reason: string;
 }) => {
@@ -193,6 +198,7 @@ const Post = ({
     return <>404</>;
   }
 
+  console.log(dir);
   console.log(reason);
 
   return (
