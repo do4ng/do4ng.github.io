@@ -134,9 +134,12 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   }
 
   const { protocol, host } = parse(ctx.req.headers.referer);
-  console.log(`${protocol}//${host}/posts/${postList[rawPost[0]].name}.mdx`);
 
-  const res = await fetch(`${protocol}//${host}/posts/${postList[rawPost[0]].name}.mdx`);
+  const res = await fetch(
+    `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
+      postList[rawPost[0]].name
+    }.mdx`
+  );
   const markdown = await res.text();
 
   return {
