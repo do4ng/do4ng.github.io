@@ -21,7 +21,7 @@ module.exports = {
         patterns: [
           {
             from: 'node_modules/shiki/themes/material-theme-palenight.json',
-            to: 'theme.json',
+            to: '../shiki/theme.json',
           },
         ],
       })
