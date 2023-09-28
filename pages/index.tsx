@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { NextPage } from 'next';
 import ErrorPage from 'next/error';
-import posts from './api/posts.json';
+import posts from './post/posts.json';
 import PostCard from '../components/post-card';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
@@ -18,9 +18,9 @@ const Home: NextPage = () => {
       </Head>
       <NextSeo description="do4ng"></NextSeo>
       <div className="posts">
-        {posts.map((post) => (
+        {Object.keys(posts).map((post) => (
           // eslint-disable-next-line react/jsx-key
-          <PostCard data={post.data}></PostCard>
+          <PostCard data={posts[post]}></PostCard>
         ))}
       </div>
     </>
