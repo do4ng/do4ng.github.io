@@ -153,11 +153,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
 }
 
 const Post = ({
-  markdown,
   data,
+  markdown,
 }: {
-  markdown: MDXRemoteSerializeResult;
   data: PostType;
+  markdown: MDXRemoteSerializeResult;
 }) => {
   const router = useRouter();
   const { slug } = router.query;
