@@ -19,6 +19,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { useEffect, useRef, useState } from 'react';
 import { randomInt } from 'crypto';
+import { parse } from 'url';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -79,7 +80,6 @@ const components = {
             <button
               className="copy-code"
               onClick={() => {
-                console.log((ref.current as any)?.innerText);
                 window.navigator.clipboard
                   .writeText((ref.current as any)?.innerText)
                   .then(() => {
@@ -133,9 +133,11 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     };
   }
 
-  const markdown = readFileSync(
-    join(process.cwd(), `/posts/${postList[rawPost[0]].name}.mdx`)
-  ).toString();
+  const { protocol, host } = parse(ctx.req.headers.referer);
+  console.log(`${protocol}//${host}/posts/${postList[rawPost[0]].name}.mdx`);
+
+  const res = await fetch(`${protocol}//${host}/posts/${postList[rawPost[0]].name}.mdx`);
+  const markdown = await res.text();
 
   return {
     props: {
