@@ -3,7 +3,6 @@ import '../styles/global.scss';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import { DefaultSeo } from 'next-seo';
-import Head from 'next/head';
 
 const DEFAULT_SEO = {
   title: 'do4ng',
@@ -32,11 +31,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="root">
         <div className="header">
           <div className="name">
-            <Link href="/">do4ng</Link>
+            <Link href="/">DOLMIN</Link>
           </div>
           <div className="items">
-            <Link href="/tags">Tags</Link>
-            <Link href="/about">About</Link>
+            <Link href="/tags">
+              <i className="ri-hashtag"></i>
+            </Link>
+            <Link href="/about">
+              <i className="ri-at-line"></i>
+            </Link>
           </div>
         </div>
         <div className="container">

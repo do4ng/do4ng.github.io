@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Link from 'next/link';
-import posts from './api/posts.json';
+import posts from './post/posts.json';
 
 export function removeArrayDup(arr: any[]) {
   let result = [];
@@ -19,15 +19,17 @@ export function removeArrayDup(arr: any[]) {
 const Home: NextPage = () => {
   let raw = [];
 
-  posts.forEach((post) => {
-    raw = [...raw, ...(post.data.tags || [])];
+  Object.keys(posts).forEach((post) => {
+    raw = [...raw, ...(posts[post].tags || [])];
   });
 
   const { result, counts } = removeArrayDup(raw);
 
   return (
     <div className="tag-list">
-      <h2>Tags</h2>
+      <h2>
+        <i className="ri-hashtag"></i>
+      </h2>
       <div className="tag-items">
         {result.map((tag) => (
           <>

@@ -1,36 +1,84 @@
 .posts {
   margin-top: 55px;
   max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .post-card {
-  width: 90%;
-  height: 105px;
-  margin: 50px auto;
-  border-top: solid 1px #dfdfdf;
-  border-radius: 15px;
-  // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  width: 260px;
+  height: 255px;
+  margin: 10px;
   transition: all ease 0.1s 0s;
 
-  .post-button {
-    background-color: #fff;
-    text-align: left;
-    border: none;
+  img {
+    top: 0;
     width: 100%;
-    height: 100%;
-    cursor: pointer;
-    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
   }
 
-  h3 {
-    font-size: 1.15em;
+  button {
+    display: block;
+    position: relative;
+  }
+
+  .post-button {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border: solid 1px #dfdfdf;
+    border-radius: 10px;
+
+    background-color: #fff;
+
+    text-align: left;
+
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+    position: relative;
+  }
+
+  .post-button-detail {
+    padding: 5px;
+  }
+
+  .post-button-tags {
+    position: absolute;
+    bottom: 0px;
+
+    border-top: 1.5px solid #dfdfdf;
+
+    width: 100%;
+
     a {
-      color: $text-dark;
+      color: $primary-100;
       text-decoration: none;
+
+      font-weight: 500;
+
+      font-size: 0.796rem;
+
+      padding: 5px 4px;
+    }
+
+    .tags {
+      margin: 8px 5px;
     }
   }
 
+  h3 {
+    padding: 5px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 0px;
+  }
+
   .post-detail {
+    padding: 0 5px;
     color: $darker-gray;
     font-size: 0.8rem;
     font-weight: 600;
@@ -44,7 +92,12 @@
 
     .tags {
       padding-top: 5px;
-      font-size: 0.85rem;
+      font-size: 0.875rem;
+      font-weight: 600;
     }
   }
+}
+
+.post-card:hover {
+  transform: translate(0, -2px);
 }
