@@ -6,7 +6,7 @@ export default function PostCard(props: { data: PostType }) {
   if (!props) return <></>;
   return (
     <>
-      <div className="post-card">
+      <div className="post-card" key={props.data.date}>
         <Link
           href={`/post/${cleanTitle(props.data.title)}`}
           className="no-a"
@@ -22,7 +22,7 @@ export default function PostCard(props: { data: PostType }) {
               <div className="tags">
                 {props.data.tags?.map((tag) => (
                   // eslint-disable-next-line react/jsx-key
-                  <Link href={`/tag/${tag}`} legacyBehavior>
+                  <Link href={`/tag/${tag}`} legacyBehavior key={tag}>
                     <a>#{tag}</a>
                   </Link>
                 ))}

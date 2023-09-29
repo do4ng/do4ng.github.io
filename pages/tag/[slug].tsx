@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       <div className="posts">
         {posts.map((post) => (
           // eslint-disable-next-line react/jsx-key
-          <PostCard data={rawPosts[post]}></PostCard>
+          <PostCard data={rawPosts[post]} key={post}></PostCard>
         ))}
       </div>
     </>
