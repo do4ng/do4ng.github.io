@@ -4,33 +4,52 @@
 
 이젠 MDX를 사용 가능하다.
 
-근데 문제가 MDX인데 React 문법을 사용하면 오류가 떠서 아직은 React 문법은 못 쓴다. 추후 고칠 예정
+MDX 컴포넌트 기능으로
 
-## 메인 화면
+```ts
+const emoji: string = '🎠';
+```
+
+이런 멋진 코드블록을 만들었다.
+
+근데 문제가 MDX인데 React 문법을 사용하면 오류가 떠서 사실상 파일 확장자만 다른 마크다운이다.
+
+## 문제점
+
+블로그에서 사용하는 코드 하이라이터는 [rehype-pretty-code](https://rehype-pretty-code.netlify.app/)이다.
+이 rehype-pretty-code에서 사용하는 핵심 라이브러리가 [shiki](https://github.com/shikijs/shiki)인데,
+문제가 shiki는 테마, 언어 팩 같은 것을 번들에 포함시키지 않고 필요할때마다 파일을 읽어서 불러온다는 것이다.
+
+vercel은 사용하지 않는 파일은 제외시키는데 아마 shiki의 테마 언어 팩을 사용하지 않는다 판단, shiki의 에셋들을 없앤 것 같다.
+
+실제로 이 문제를 겪는 사람이 많음:
+[github.com/shikijs/shiki/issues/138](https://github.com/shikijs/shiki/issues/138)
+
+## 디자인
+
+1. **메인 화면**
 
 그냥 제목과 설명만 늘여놓는 형식에서 썸네일을 포함한 카드형식으로 바꾸었다.
 
-- before
-
 ![img](/assets/2023-09-27-01.png)
 
-- after
+(비포)
 
 ![img](/assets/2023-09-27-02.png)
 
-## 포스트
+(에프터)
+
+2. **포스트**
 
 이건 크게 바뀐게 없다. 코드블록 디자인을 살짝 수정한거랑 헤더 옆에 뜨는 #를 안보이게 넣었다. (마우스를 올리면 생김)
 
-- before
-
 ![img](/assets/2023-09-27-03.png)
 
-- after
+(비포)
 
 ![img](/assets/2023-09-27-04.png)
 
-[React에 SSR 적용하기](/post/react에-ssr-적용하기)
+(에프터)
 
 ## 계획
 
