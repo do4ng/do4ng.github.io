@@ -16,6 +16,24 @@ module.exports = {
   },
   webpack(config, options) {
     config.resolve.fallback = { fs: false };
+    config.plugins.push(
+      new (require('copy-webpack-plugin'))({
+        patterns: [
+          {
+            from: 'node_modules/shiki/languages',
+            to: join(__dirname, 'shiki/languages'),
+          },
+          {
+            from: 'node_modules/shiki/themes',
+            to: join(__dirname, 'shiki/themes'),
+          },
+          {
+            from: 'node_modules/shiki/dist',
+            to: join(__dirname, 'shiki/dist'),
+          },
+        ],
+      })
+    );
     return config;
   },
 };
