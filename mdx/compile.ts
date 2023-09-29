@@ -47,10 +47,6 @@ export const compileMdx = async (content: string): Promise<string> => {
                   typeof window !== 'undefined'
                     ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
                     : join(process.cwd(), 'shiki/themes'),
-                wasm:
-                  typeof window !== 'undefined'
-                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/'
-                    : null,
                 languages:
                   typeof window !== 'undefined'
                     ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'

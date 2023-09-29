@@ -27,10 +27,6 @@ module.exports = {
             from: 'node_modules/shiki/themes',
             to: join(__dirname, 'shiki/themes'),
           },
-          {
-            from: 'node_modules/shiki/dist',
-            to: join(__dirname, 'shiki/dist'),
-          },
         ],
       })
     );
