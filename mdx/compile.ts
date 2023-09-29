@@ -5,7 +5,7 @@ import raw from 'rehype-raw';
 
 import fs from 'fs';
 import { join } from 'path';
-import { getHighlighter, BUNDLED_LANGUAGES } from 'shiki';
+import { getHighlighter, BUNDLED_LANGUAGES, BUNDLED_THEMES } from 'shiki';
 
 import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
 
@@ -37,25 +37,17 @@ export const compileMdx = async (content: string): Promise<string> => {
       [
         rehypePrettyCode,
         {
+          theme: MaterialPalenight,
           getHighlighter: async (options) => {
             touchShikiPath();
             const highlighter = await getHighlighter({
-              ...(options as any),
-              theme: MaterialPalenight,
-              langs: BUNDLED_LANGUAGES,
+              ...options,
+              themes: BUNDLED_THEMES,
+              langs: [...BUNDLED_LANGUAGES],
               paths: {
-                themes:
-                  typeof window !== 'undefined'
-                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
-                    : null,
-                wasm:
-                  typeof window !== 'undefined'
-                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/'
-                    : null,
-                languages:
-                  typeof window !== 'undefined'
-                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
-                    : null,
+                themes: 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/',
+                wasm: 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/',
+                languages: 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/',
               },
             });
 
