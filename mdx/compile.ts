@@ -40,14 +40,25 @@ export const compileMdx = async (content: string): Promise<string> => {
           theme: MaterialPalenight,
           getHighlighter: async (options) => {
             touchShikiPath();
+            console.log(BUNDLED_LANGUAGES);
             const highlighter = await getHighlighter({
               ...options,
               themes: BUNDLED_THEMES,
+
               langs: [...BUNDLED_LANGUAGES],
               paths: {
-                themes: 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/',
-                wasm: 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/',
-                languages: 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/',
+                themes:
+                  typeof window !== 'undefined'
+                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/themes/'
+                    : null,
+                wasm:
+                  typeof window !== 'undefined'
+                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/dist/'
+                    : null,
+                languages:
+                  typeof window !== 'undefined'
+                    ? 'https://cdn.jsdelivr.net/npm/shiki@latest/languages/'
+                    : null,
               },
             });
 
