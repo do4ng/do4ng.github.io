@@ -7,7 +7,7 @@ import fs from 'fs';
 import { join } from 'path';
 import { getHighlighter, BUNDLED_LANGUAGES, BUNDLED_THEMES } from 'shiki';
 
-import MaterialPalenight from 'shiki/themes/material-theme-palenight.json';
+import Theme from 'shiki/themes/github-dark.json';
 
 import { plugin } from '../plugins/anchor';
 
@@ -37,11 +37,13 @@ export const compileMdx = async (content: string): Promise<string> => {
       [
         rehypePrettyCode,
         {
-          theme: MaterialPalenight,
+          theme: Theme,
+          keepBackground: false,
           getHighlighter: async (options) => {
             touchShikiPath();
             const highlighter = await getHighlighter({
               ...options,
+
               paths: {
                 themes:
                   typeof window !== 'undefined'

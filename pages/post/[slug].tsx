@@ -79,6 +79,8 @@ export const components = {
     const lang = props['data-language'];
     const [copy, setCopy] = useState('copy');
 
+    console.log(props);
+
     const ref = useRef();
 
     return (

@@ -162,9 +162,30 @@ button {
   }
 
   pre {
+    background-color: #292d3e;
     margin: 0;
     padding: 0.85em 1.05rem;
     overflow: auto;
+    max-height: 524px;
+  }
+
+  code {
+    counter-reset: line;
+    span[data-highlighted-line] {
+      background-color: #202431;
+    }
+  }
+
+  code > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+
+    /* Other styling */
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1.25rem;
+    text-align: right;
+    color: gray;
   }
 }
 
