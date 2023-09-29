@@ -1,0 +1,98 @@
+React로 이 블로그를 개발하면서 나랑은 맞지 않다는 것을 느꼈다. 분명히 편한 것은 맞지만 나에겐 2% 부족한 느낌이였다.
+자바스크립트 안에서 HTML을 사용할 수 있다는 점은 좋지만 꼭 컴파일이라는 귀찮은 단계를 거쳐야 할만큼 가치가 있는 것일까?와 같은 생각이 들었다.
+
+그래서 나에게 최적화된 라이브러리를 만들려고 한다.
+
+## Tagged Templates
+
+자바스크립트의 기능인 [Tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)를 활용할 것이다.
+
+이 Tagged Templates는 다음과 같다.
+
+```ts
+const person = {
+  name: 'John',
+  age: '68',
+};
+
+function introduce(strings, name, age) {
+  const isYoung = age < 40;
+
+  console.log(`${strings[0]}:${name}`);
+  console.log(`${strings[1]}:${age}`);
+  console.log(`He/She is ${isYoung ? 'young' : 'old'}`);
+}
+
+introduce`name${person.name}age${person.age}`;
+/*
+name:John
+age:68
+He/She is old
+*/
+```
+
+## 계획
+
+기본적인 아이디어는 [lit](https://lit.dev/)과 비슷하다.
+
+방금 말했던 Tagged Templates를 활용할 것이다.
+
+```ts
+import { html, render } from 'my-framework';
+
+const target = document.getElementById('app');
+const element = html`<h1>Hello World</h1>`;
+
+render(target, element);
+```
+
+```html
+<div id="app"><h1>Hello World</h1></div>
+```
+
+리엑트에 `useState`와 같은 훅도 넣으면 좋을 것 같다.
+
+```ts
+import { html, state } from 'my-framework';
+
+const [count, setCount] = state(0);
+
+const element = html`
+  <h1>Count: ${count}</h1>
+
+  <button
+    onClick=${() => {
+      setCount(count + 1);
+    }}
+  >
+    +
+  </button>
+  <button
+    onClick=${() => {
+      setCount(count - 1);
+    }}
+  >
+    -
+  </button>
+`;
+```
+
+컴포넌트도 이런 라이브러리에 빠져서는 안될 요소이다.
+
+```ts
+import { html, component } from 'my-framework';
+
+const greeting = component(({ props }) => html`<h1>Hello ${props.name}</h1>`);
+const element = html`${greeting({ name: 'world' })}`;
+```
+
+이렇게만 만들면 장점이 있다.
+
+1. 컴파일이 없이도 브라우저에서 작동
+2. SSR 구현이 매우 쉬움
+
+## 마무리
+
+사실은 이런 [시도](https://github.com/do4ng/zit)를 옛날에도 한 적이 있었다.  
+그 때도 이런식으로 만들려고 하다가 HTML을 파싱해야한다는 난관 때문에 잠깐 멈췄다가 아직까지 방치중이다.
+얼마 전 HTML 파서를 성공적으로 제작했는데 그 코드를 그대로 가져오기만 한다면 아마 어려움 없이 프로젝트를 완성할 수 있을 것 같다.
