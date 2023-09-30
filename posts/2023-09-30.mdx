@@ -1,0 +1,210 @@
+옛날에 만들어 놓은 HTML 파서를 가져와서 원하는 기능만 추가한 거라 어렵지 않게 구현할 수 있었다.
+
+## 구성
+
+```ts
+html`hello ${'world'}`;
+```
+
+이런 코드가 있다고 하면 삽입된 데이터 값 (`${'world'}`)을 우리는 어떻게든 해야 한다.
+
+마음같아서는 그냥 값만 추출해서 놓고 싶지만 우리는 state라는 과제가 있기 때문에 절대 그래서는 안된다.  
+만약 값만 추출해서 넣는다면 state 값이 변경됬는데도 컴포넌트가 업데이트되지 않는 참사가 일어날 것이다.
+
+또 이 데이터 값을 무시하고 그냥 파싱해버리면 이 데이터 값이 어디 들어가야되는지 모른다.
+
+그래서 생각한 것이 `$`이다.  
+`$1$` 처럼 `$`로 둘러싼 것을 파서가 데이터 값으로 인식할 것이다.
+
+뭔말이냐면  
+위 코드에서 `${'world'}` 부분이 `$1$`로 변환되서 파싱 단계로 들어간다는 것이다.
+
+## 파서
+
+먼저 구문을 분석해야 한다.
+
+1. **Element**
+
+아무리 컴파일을 안해도 되는 라이브러리라고 해도 사실 라이브러리 안에서는 컴파일이라는 것을 해야한다.
+
+`document.createElement` 처럼 Element를 정의할 수 있는 클래스를 만들었다.
+
+```ts
+export type CombineData = Array<{ type: 'data'; value: string }>;
+export type ElementType = 'element' | 'text' | 'data' | 'fragment' | 'comment';
+export type ElementAttributes = Record<
+  string,
+  | string
+  | {
+      type: 'data';
+      value: string;
+    }
+  | CombineData
+>;
+```
+
+- 첫 번째 줄에 `CombineData`는 리엑트에 `<div {...props} />` 처럼 `<div ${{id: "10"}}>` 같은 것들을 표현하는 타입이다.
+
+- `ElementType`는 말그대로 Element 타입이다. 여기서 `data`가 `$`를 말하는 거다.
+
+- `ElementAttributes`는 attribute 타입이다.
+
+```ts
+class HTMLElement {
+  public type: ElementType;
+
+  public tagName: string;
+
+  public attributes: ElementAttributes;
+
+  public childNodes: HTMLElement[];
+
+  public text: string = null;
+
+  constructor({
+    type,
+    tagName,
+    attributes,
+    childNodes,
+    text,
+  }: {
+    type: ElementType;
+    tagName?: string;
+    attributes?: ElementAttributes;
+    childNodes?: HTMLElement[];
+    text?: string;
+  }) {
+    this.type = type;
+    this.tagName = tagName;
+    this.attributes = attributes || {};
+    this.childNodes = childNodes || [];
+    this.text = text || null;
+  }
+
+  appendChild(element: HTMLElement) {
+    if (element.type === 'text') {
+      const filtered = element.text.replace(/\n/g, '').replace(/\r/g, '');
+      if (filtered.trim() !== '') {
+        this.childNodes.push(element);
+      }
+    } else {
+      this.childNodes.push(element);
+    }
+  }
+
+  removeChild(element: HTMLElement) {
+    return this.childNodes.filter((item) => item !== element);
+  }
+}
+
+export { HTMLElement };
+```
+
+간단하게 element를 정의하는 클래스다.
+
+```ts
+const element = new HTMLElement({ type: 'text', text: 'hello' });
+```
+
+2. **파서**
+
+(코드를 복붙하니깐 용량 경고 떠서 깃헙 링크로 대체함)
+
+[/parser/parser.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/parser/parser.ts)
+
+작동원리는 다음과 같다.
+
+```html
+Hello <strong>World</strong>
+```
+
+이런 코드가 있다 하면  
+쭉 긁어 모으다가 `<...>`를 발견하면 지금까지 긁어 모은 것을 저장한 뒤 다시 `</...>`를 만날 때까지 긁는다.  
+그러다가 닫는 태그 (`</>`)를 만나면 지금까지 긁어 모은 것을 파서에 넘긴다.
+
+- **태그 파서**
+
+[/parser/tag.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/parser/tag.ts)
+
+`id="message" class="bold"`와 같은 attributes도 분석해야 한다.
+
+`<div enabled>`와 같은 것도 처리해야한다.
+
+## HTML
+
+이제 파서도 구현했으니 HTML을 받고 파싱한 뒤 화면에 보여줘야 한다.
+
+- DOM
+
+모든 것을 구현하기 전 가장 중요한 것이 있다. 바로 `React.createElement` 처럼 이 라이브러리 안에서 사용할 element를 정의할 수 있는 것을 만들어야 한다.
+
+[/core/dom/index.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/core/dom/index.ts)
+
+먼저 Fragment다.
+
+```ts
+// fragment
+createFragment([
+  {
+    // ... //
+  },
+]);
+```
+
+React의 Fragment 개념과 같다. element들을 담는 상자라 보면 된다.
+
+그리고 Text, Data가 있는데 Text는 TextNode를, Data는 `$~~$`를 뜻한다.
+
+```ts
+createText({
+  // ... //
+});
+createData({
+  // ... //
+});
+```
+
+참고로 Data는 state, component, text 모두 될 수 있어서 하나하나씩 정의해줘야 한다.  
+state 설명할 때 다시 설명할 건데, 만약 data 값이 state면 `window.$$zeto.state`에 콜백 함수를 등록한다.
+
+마지막으로 Element이다
+
+```ts
+createElement({
+  children: [],
+});
+```
+
+element를 생성한 뒤, children의 타입까지 모두 검사해서 element면 다시 `createElement`를 호출하고 아니면 `createData`와 같은 텍스트 노드를 생성한다.
+
+- `compile()`
+
+앞에서 말했듯이 사용자는 컴파일을 안해도 되지만 이 라이브러리 안에서는 컴파일을 해야한다.
+
+[/core/compile.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/core/compile.ts)
+
+- `html()`
+
+이 패키지의 핵심 함수이다.
+
+[/core/html.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/core/html.ts)
+
+## State
+
+프론트엔드의 꽃, state도 구현하였다.
+
+[/state/index.ts](https://github.com/do4ng/zeto/blob/main/packages/zeto/src/state/index.ts)
+
+`state()`가 호출되었을 때 `window.$$zeto.state`에 고유한 id로 저장한 뒤 state가 변경되면 `window.$$zeto.state[id]`에 저장된 모든 콜백 함수를 실행하는 원리다.
+
+이게 맞는진 몰라도 작동은 한다.
+
+## 마치며
+
+아직 구현하지 않은게 많다. SSR이 가장 최우선이다.
+
+참고로 npm에 배포하고 github에 소스코드를 공개해놨다.
+
+```bash
+npm i zeto
+```
