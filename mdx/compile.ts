@@ -66,8 +66,6 @@ export const compileMdx = async (content: string): Promise<string> => {
 
   const code = await compile(content, options);
 
-  console.log(typeof code);
-
   const text = String(code);
 
   return text;

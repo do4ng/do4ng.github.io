@@ -75,37 +75,86 @@ export const components = {
   h6: (props: any) => {
     return <h6 {...props}></h6>;
   },
-  pre: (props: any) => {
-    const lang = props['data-language'];
-    const [copy, setCopy] = useState('copy');
+  div: (props: any) => {
+    if (props['data-rehype-pretty-code-fragment'] === '') {
+      if (props.children[0]?.props['data-rehype-pretty-code-title'] !== '') {
+        const lang = props.children.props['data-language'];
+        const [copy, setCopy] = useState('copy');
+        const ref = useRef<HTMLButtonElement>();
+        return (
+          <div data-rehype-pretty-code-fragment="">
+            <div {...props.children.props} data-rehype-pretty-code-title="">
+              <div className="code-lang">
+                <i className={`ri-${langsIcons[lang] || langsIcons.txt}`}></i>
+                <span>{langs[lang] || langs.txt}</span>
+                <button
+                  ref={ref}
+                  className="copy-code"
+                  onClick={() => {
+                    const code =
+                      ref.current.parentNode.parentNode.parentNode.querySelector(
+                        'code'
+                      ).innerText;
 
-    console.log(props);
+                    window.navigator.clipboard.writeText(code).then(() => {
+                      setCopy('copied!');
+                      setTimeout(() => {
+                        setCopy('copy');
+                      }, 2000);
+                    });
+                  }}
+                >
+                  {copy}
+                </button>
+              </div>
+            </div>
+            {props.children}
+          </div>
+        );
+      }
+    }
 
-    const ref = useRef();
+    if (props['data-rehype-pretty-code-title'] === '') {
+      const lang = props['data-language'];
+      const [copy, setCopy] = useState('copy');
+      const ref = useRef<HTMLButtonElement>();
+      const title = props.children;
 
-    return (
-      <>
-        <div className="code-block" style={props.style}>
+      return (
+        <div {...props}>
           <div className="code-lang">
             <i className={`ri-${langsIcons[lang] || langsIcons.txt}`}></i>
-            <span>{langs[lang] || langs.txt}</span>
+            <span>{title}</span>
             <button
+              ref={ref}
               className="copy-code"
               onClick={() => {
-                window.navigator.clipboard
-                  .writeText((ref.current as any)?.innerText)
-                  .then(() => {
-                    setCopy('copied!');
-                    setTimeout(() => {
-                      setCopy('copy');
-                    }, 2000);
-                  });
+                const code =
+                  ref.current.parentNode.parentNode.parentNode.querySelector(
+                    'code'
+                  ).innerText;
+
+                window.navigator.clipboard.writeText(code).then(() => {
+                  setCopy('copied!');
+                  setTimeout(() => {
+                    setCopy('copy');
+                  }, 2000);
+                });
               }}
             >
               {copy}
             </button>
           </div>
-          <pre ref={ref} {...props}></pre>
+        </div>
+      );
+    }
+    return <div {...props}></div>;
+  },
+  pre: (props: any) => {
+    return (
+      <>
+        <div className="code-block" style={props.style}>
+          <pre {...props}></pre>
         </div>
       </>
     );
