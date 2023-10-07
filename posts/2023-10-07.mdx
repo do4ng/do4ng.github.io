@@ -1,0 +1,47 @@
+## 서론
+
+얼마 전 Svelte가 Typescript를 더이상 쓰지 않고 Javascript를 쓴다는 [소식](https://devclass.com/2023/05/11/typescript-is-not-worth-it-for-developing-libraries-says-svelte-author-as-team-switches-to-javascript-and-jsdoc/)을 들었다.  
+Svelte가 Javascript를 사용하는 이유는 컴파일이 필요하다는 이유였다.
+
+Harris가 Typescript를 버린 이유가 있지 않을까  
+한 번 Typescript 대신 Javascript를 사용해보기로 하였다. (필자는 ts를 경험한 뒤 `.js`를 쓴적이 없음)
+
+## Ts 대신 Js
+
+JsDoc을 사용하면 타입 힌트를 제공할 수 있다.
+
+```ts title="types/index.d.ts"
+export type Greeting = (name: string) => void;
+```
+
+```js title="index.js"
+/**
+ * @type {import("./types/index.d.ts").Greeting}
+ **/
+const greeting = (name) => {
+  console.log(`Hello ${name}`);
+};
+```
+
+![img](/assets/2023-10-07-1.png)
+
+타입 힌트도 잘 뜬다.
+
+`.d.ts`를 쓰기 싫으면 아래 방법도 있다.
+
+```ts title="index.js"
+/**
+ * @param {string} name
+ * @returns {void}
+ */
+function greeting2(name) {
+  console.log(`Hello ${name}`);
+}
+```
+
+이 방법 또한 잘 된다.
+
+## 결론
+
+솔직히 나쁘진 않다. 근데 앞으로 나는 이렇게 주석 쓸 바엔 Typescript 쓸 것 같다.  
+Typescript에 질렸거나 간단한 프로젝트를 만드는 상황이 오면 이 Jsdoc도 나쁘지 않은 선택이다.

@@ -1,4 +1,12 @@
 {
+  "Typescript에서-Javascript로-이주하기": {
+    "name": "2023-10-07",
+    "title": "Typescript에서 Javascript로 이주하기",
+    "date": "2023-10-07",
+    "tags": ["typescript", "javascript"],
+    "description": "현재 Typescript의 문제점",
+    "image": "/img/2023-10-07.png"
+  },
   "나만의-프론트엔드-라이브러리-만들기-(2)": {
     "name": "2023-09-30",
     "title": "나만의 프론트엔드 라이브러리 만들기 (2)",
