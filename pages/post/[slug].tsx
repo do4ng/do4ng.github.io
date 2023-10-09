@@ -3,9 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
-import { GetServerSidePropsContext } from 'next';
+import { GetStaticPropsContext } from 'next';
 
 import { useRef, useState } from 'react';
 
@@ -54,6 +53,7 @@ const langs = {
   txt: 'Plain',
   bash: 'Terminal',
   sh: 'Terminal',
+  rs: 'Rust',
 };
 
 export const components = {
@@ -181,7 +181,16 @@ export function cleanTitle(title: string = ''): string {
   return title.replace(/ /g, '-').trim().toLocaleLowerCase();
 }
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+export function getStaticPaths() {
+  return {
+    paths: Object.keys(postList).map((post) => ({
+      params: { slug: post.toLowerCase() },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps(ctx: GetStaticPropsContext) {
   touchShikiPath();
   const rawPost = Object.keys(postList).filter((value) => {
     return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
