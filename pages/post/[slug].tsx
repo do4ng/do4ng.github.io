@@ -14,6 +14,7 @@ import { readFileSync, readdir } from 'fs';
 
 import { Content } from '../../mdx/content';
 import { compileMdx } from '../../mdx/compile';
+import { LoadTags } from '../tag/[slug]';
 
 const touched = { current: false };
 
@@ -272,6 +273,11 @@ const Post = ({
   const router = useRouter();
   const { slug } = router.query;
 
+  const anotherPosts: PostType[] = LoadTags(data.tags[0]).map((t) => ({
+    ...postList[t],
+    origin: t,
+  })) as any;
+
   if (markdown === null) {
     return <>404</>;
   }
@@ -302,6 +308,29 @@ const Post = ({
         </div>
         <div className="post">
           <Content content={compiled}></Content>
+
+          <div className="other-posts">
+            <h4>#{data.tags[0]}의 다른 글</h4>
+            <div className="other-posts-container">
+              {anotherPosts.map((post) => (
+                <>
+                  <div className="other-post">
+                    <Link
+                      className={
+                        (post as any).origin.toLowerCase() ===
+                        (slug as string).toLowerCase()
+                          ? 'active'
+                          : null
+                      }
+                      href={`/post/${(post as any).origin}`}
+                    >
+                      {post.title}
+                    </Link>
+                  </div>
+                </>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="footer">
           <div className="edit">

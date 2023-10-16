@@ -10,7 +10,7 @@
 .post-card {
   width: 260px;
   height: 255px;
-  margin: 10px;
+  margin: 20px 10px;
   transition: all ease 0.1s 0s;
 
   img {
@@ -27,10 +27,10 @@
 
   .post-button {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    border: solid 1px #dfdfdf;
+    border: solid 1px $gray;
     border-radius: 10px;
 
-    background-color: #fff;
+    background-color: $bg-100;
 
     text-align: left;
 
@@ -52,7 +52,7 @@
     position: absolute;
     bottom: 0px;
 
-    border-top: 1.5px solid #dfdfdf;
+    border-top: 1.5px solid $gray;
 
     width: 100%;
 

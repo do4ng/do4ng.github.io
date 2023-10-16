@@ -6,6 +6,14 @@ import rawPosts from '../post/posts.json';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 
+export const LoadTags = (slug: string | string[]) => {
+  const posts = Object.keys(rawPosts).filter((post) =>
+    rawPosts[post].tags?.includes(slug as string)
+  );
+
+  return posts;
+};
+
 const Home: NextPage = () => {
   const router = useRouter();
   if (!router.isFallback && !rawPosts) {
@@ -13,9 +21,7 @@ const Home: NextPage = () => {
   }
   const { slug } = router.query;
 
-  const posts = Object.keys(rawPosts).filter((post) =>
-    rawPosts[post].tags?.includes(slug as string)
-  );
+  const posts = LoadTags(slug);
 
   return (
     <>

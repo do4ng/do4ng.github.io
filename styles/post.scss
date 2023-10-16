@@ -37,6 +37,12 @@
   color: $text-blue;
   width: 85%;
   margin: 40px auto;
+  position: relative;
+
+  img {
+    height: auto;
+  }
+
   ul {
     padding-left: 25px;
   }
@@ -69,7 +75,7 @@
     a {
       margin-left: -0.9em;
       padding-right: 5px;
-      color: #fff;
+      color: $bg-100;
       font-weight: 500;
       font-size: 1.55rem;
     }
@@ -111,6 +117,47 @@
     }
     a:hover {
       color: $link-blue-dark;
+    }
+  }
+}
+
+.other-posts {
+  margin-top: 50px;
+
+  width: 100%;
+
+  padding: 10px 20px;
+
+  border: 1px solid $gray;
+  border-radius: 10px;
+
+  h4 {
+    margin: 0;
+  }
+
+  .other-posts-container {
+    margin-top: 5px;
+  }
+
+  .other-post {
+    line-height: 150%;
+    a {
+      font-weight: 500;
+      font-size: 14px;
+
+      color: $text-200;
+    }
+    a.active {
+      color: $primary-100;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    a.active:hover {
+      color: $primary-200;
+    }
+    a:not(.active):hover {
+      color: $text-100;
     }
   }
 }
