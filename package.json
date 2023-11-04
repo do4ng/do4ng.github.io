@@ -14,6 +14,7 @@
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.5.3",
     "copy-webpack-plugin": "^11.0.0",
+    "javascript-time-ago": "^2.5.9",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "1",
     "next": "13",
@@ -30,6 +31,7 @@
     "remark-slug": "^7.0.1",
     "sass": "^1.68.0",
     "shiki": "^0.14.4",
+    "time-counting": "^2.0.2",
     "unist-util-visit": "2"
   },
   "devDependencies": {

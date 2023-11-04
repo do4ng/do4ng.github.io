@@ -1,12 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
+import timeCounting from 'time-counting';
 
 import { GetStaticPropsContext } from 'next';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 
 import postList from './posts.json';
 import { join } from 'path';
@@ -295,18 +298,24 @@ const Post = ({
       ></NextSeo>
       <div className="post-container">
         <div className="preface">
-          <div className="date">{data.date}</div>
           <div className="title">{data.title}</div>
+          <div className="post-items">
+            <div className="name">do4ng</div>
+            <div className="border"> • </div>
+            <div className="date">{timeCounting(data.date)}</div>
+          </div>
           <div className="tags">
             {data.tags?.map((tag) => (
               // eslint-disable-next-line react/jsx-key
-              <a href={`/tag/${tag}`} key={tag}>
+              <a href={`/tag/${tag}`} key={tag} className="posttag">
                 #{tag}
               </a>
             ))}
           </div>
         </div>
         <div className="post">
+          <img src={data.image} alt=""></img>
+
           <Content content={compiled}></Content>
 
           <div className="other-posts">
