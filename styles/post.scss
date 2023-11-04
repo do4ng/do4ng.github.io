@@ -67,10 +67,14 @@ blockquote {
 .posttag {
   background-color: #e2e8f0;
   color: #718096;
-  margin-right: 15px;
+  margin: 0px 5px;
   padding: 3px 7px !important;
   border-radius: 5px;
   font-size: 14px;
+}
+
+.post-layer {
+  display: flex;
 }
 
 .post {
@@ -201,5 +205,46 @@ blockquote {
     a:not(.active):hover {
       color: $text-100;
     }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  nav {
+    display: none;
+  }
+}
+
+nav {
+  border-left: 1px solid $gray;
+  padding-left: 15px;
+
+  position: fixed;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .no-a {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  a {
+    color: $text-100;
+    text-decoration: none;
+  }
+
+  li.active > a {
+    color: $link-blue;
+  }
+
+  li > a:hover {
+    color: $text-200;
   }
 }

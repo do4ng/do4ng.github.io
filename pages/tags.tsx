@@ -35,9 +35,11 @@ const Home: NextPage = () => {
           <>
             <div className="tag-item">
               <Link href={`/tag/${tag}`} legacyBehavior>
-                <a className="tag-a">#{tag}</a>
+                <a className="tag-a posttag">
+                  #{tag}
+                  <span className="tag-count">({counts[tag]})</span>
+                </a>
               </Link>
-              <span className="tag-count">({counts[tag]})</span>
             </div>
           </>
         ))}
