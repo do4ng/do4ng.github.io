@@ -215,32 +215,41 @@ blockquote {
 }
 
 nav {
-  border-left: 1px solid $gray;
   padding-left: 15px;
 
   position: fixed;
 
   ul {
+    padding-left: 0px;
     list-style-type: none;
-    padding: 0;
+    margin-top: 5px;
   }
 
   li {
-    margin-top: 5px;
-    font-size: 14px;
+    transition: all ease 0.25s 0s;
+    border-left: 1px solid $gray;
+    padding: 2px 10px;
+    font-size: 13px;
   }
 
   .no-a {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   a {
-    color: $text-100;
+    transition: all ease 0.25s 0s;
+    color: $dark-gray;
     text-decoration: none;
   }
 
+  li.active {
+    padding: 6px 10px;
+    border-left: 1px solid $link-blue;
+  }
+
   li.active > a {
+    padding-left: 1px;
     color: $link-blue;
   }
 

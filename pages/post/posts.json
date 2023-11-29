@@ -1,4 +1,12 @@
 {
+  "새로운-문서": {
+    "name": "2023-11-23",
+    "title": "새로운 문서",
+    "date": "2023-11-23",
+    "tags": ["ui", "next"],
+    "description": "",
+    "image": "/assets/2023-11-23.png"
+  },
   "Typescript에서-Javascript로-이주하기": {
     "name": "2023-10-07",
     "title": "Typescript에서 Javascript로 이주하기",

@@ -1,0 +1,32 @@
+![img](/assets/2023-11-23.png)
+
+> 새로 만드는 문서 (위)
+
+![img](/assets/2023-11-23-2.png)
+
+> vitepress로 만든 문서 (아래)
+
+Zely 문서를 nextjs로 다시 만들고 있다. 기존 문서는 vitepress에 커스텀 테마를 추가하는 방식으로 작성했는데,
+새로 만드는 문서는 nextjs로 새롭게 만들고 있다. nextra에서 영감을 받았고 nextra를 사용할까 고민했지만 전체적인 디자인이 마음에 안들어서 그냥 만들었다.
+
+개인적으로 새로만드는 문서의 디자인이 더 마음에 든다. vitepress는 살짝 둥글둥글한 느낌이면 이건 둥글둥글 + 심플인 것 같다.
+
+참고로 다크모드도 된다.
+
+아직 틀만 잡았고 이제 본격적으로 내용 넣기, 블로그 제작, 모바일 지원 등 할 것이 많다.
+
+![img](/assets/2023-11-23-3.png)
+
+> 이게 하이라이트다
+
+## App Routing
+
+Nextjs의 app routing을 처음 사용 해 보았다. sveltekit을 그만 사용한 이유가 file based routing에서 directory based routing으로
+바뀌어서 일 정도로 directory based routing을 부정적으로 봤었는데, 막상 사용해 보니깐 나쁘지 않았다.
+
+하지만 `<Link>` + `staticProps`를 사용하면 페이지가 완전 리로드되는 문제가 있었다. 여러 사람들이 겪고 있는 문제인 것 같은데
+해결방법을 모르겠다.
+
+- https://www.reddit.com/r/nextjs/comments/12754ha/page_always_reload_after_routerpush_or_via_link/
+
+이런 문제 때문인지는 몰라도 app routing과 page routing 둘 중 하나를 고르라고 하면 아직 나는 page routing라고 말할 것 같다.

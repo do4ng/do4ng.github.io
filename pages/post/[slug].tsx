@@ -190,7 +190,7 @@ const Headings = ({ headings, activeId }) => (
   <ul>
     {headings.map((heading) => (
       <li key={heading.id} className={heading.id === activeId ? 'active' : ''}>
-        <a href={`#${heading.id}`}>{heading.title}</a>
+        <a href={`#${heading.id}`}>{heading.title.slice(1)}</a>
         {heading.items.length > 0 && (
           <ul>
             {heading.items.map((child) => (
@@ -295,9 +295,7 @@ const TableOfContents = ({ data }) => {
       <a
         href={`https://github.com/do4ng/do4ng.github.io/edit/main/posts/${data.raw}`}
         className="no-a"
-      >
-        <i className="ri-edit-2-line"></i> Edit on Github
-      </a>
+      ></a>
     </nav>
   );
 };
