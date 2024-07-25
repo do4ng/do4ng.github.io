@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <div
         className={`header-container ${
-          usePathname().startsWith('/post') ? 'fixed' : ''
+          usePathname()?.startsWith('/post') ? 'fixed' : ''
         } ${isScrolled ? 'scrolled' : ''}`}
       >
         <div className="header-bg">
