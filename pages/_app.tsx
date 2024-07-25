@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (typeof window === 'undefined') return;
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset;
-      if (scrollTop > 20) {
+      if (scrollTop > 10) {
         setScrolled(true);
       } else {
         setScrolled(false);
