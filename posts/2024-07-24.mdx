@@ -1,0 +1,165 @@
+next로 개발하다보면 오류가 발생한 Typescript 파일의 위치를 정확히 콕 찝어준다.  
+근데 생각을 해보면 브라우저는 typescript를 읽을 수 없는데 어떤 방식으로 typescript파일에서 오류가 발생한 위치를
+추적할 수 있을까라는 궁금증이 든다.
+
+그래서 nodejs에서 타입스크립트 뿐만 아니라 번들된 파일에서의 오류 트레킹하는 코드를 작성해보았다.
+
+## 정답은 소스맵
+
+우리가 번들러를 사용해서 컴파일했을때 나오는 `.map` 파일을 소스맵이라고 하는데
+거기에 원본 파일의 정보가 담겨져있다고 한다.
+
+## 1. 오류 파싱
+
+가장 먼저 해야할 것은 오류가 발생한 javascript 파일의 위치를 찾는 것이였다.
+
+```ts
+// lib/index.ts
+function parseError(err: Error) {
+  const st = err.stack?.split('\n').slice(1);
+  return st?.map((stack) => {
+    stack = stack.slice(7);
+    const $ = {
+      at: '',
+      loc: '',
+    };
+
+    $.loc = (/\([^)]*\)/.exec(stack) || [])[0] || '';
+    $.at = stack.replace($.loc, '');
+
+    return $;
+  });
+}
+
+export { parseError };
+```
+
+```js
+console.log(parseError(new Error('aaa')));
+```
+
+간단한 오류를 출력해보면
+
+```json
+[
+  {
+    "at": "Object.<anonymous> ",
+    "loc": "(D:\\error-tracking\\dist\\parse.js:38:15)"
+  },
+  {
+    "at": "Module._compile ",
+    "loc": "(node:internal/modules/cjs/loader:1241:14)"
+  }
+  // ...
+]
+```
+
+원하는 결과가 나온다. 위 파싱된 에러 배열의 첫 번째가 원래 위치를 찾는 데 중요한 열쇠가 될 것이다.
+
+```ts
+const stacks = parseError(err);
+const occured = stacks[0].loc.slice(1, -1);
+const sliced = occured.split(':');
+
+const column = sliced.pop();
+const line = sliced.pop();
+
+const trace = {
+  filename: occured,
+  line: Number(line),
+  column: Number(column),
+};
+```
+
+이렇게 하면 오류가 발생한 파일, 행, 열까지 다 추출된다.
+
+이제 모든 준비는 끝났다. sourcemap을 해석하고 해석된 sourcemap에서 원하는 값만 얻으면 된다.
+
+## 2. sourcemap 컴파일하기
+
+[npm](https://www.npmjs.com/package/source-map)에서 아주 좋은 패키지를 찾았다.
+
+그냥 소스맵, 행, 열만 넣으면 위치를 찾아주는 패키지이다.
+
+그렇게 완성한 코드는 다음과 같다
+
+```ts
+// src/parse.ts
+import { existsSync, readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { SourceMapConsumer } from 'source-map';
+
+import { parseError } from '~/lib/index';
+
+async function parse(err: Error, map?: string) {
+  const stacks = parseError(err);
+  const occured = stacks[0].loc.slice(1, -1);
+  const sliced = occured.split(':');
+
+  const column = sliced.pop();
+  const line = sliced.pop();
+
+  const trace = {
+    filename: occured,
+    line: Number(line),
+    column: Number(column),
+  };
+
+  if (!existsSync(map)) {
+    throw new Error(".map file desn't exist");
+  }
+
+  const sourcemapRaw = JSON.parse(readFileSync(map, 'utf-8'));
+
+  const sourcemap = new SourceMapConsumer(sourcemapRaw);
+
+  const result = (await sourcemap).originalPositionFor(trace);
+  const target = join(dirname(sliced.join(':')), result.source);
+
+  const errorFile = readFileSync(target, 'utf-8').split('\n');
+  const errorLine = errorFile[result.line - 1];
+
+  stacks.unshift({
+    at: '',
+    loc: `${target}:${result.line}:${result.column}`,
+  });
+
+  return { line: errorLine, originalFile: errorFile, stacks };
+}
+
+async function emit(e: Error, map: string) {
+  const parsed = await parse(e, map);
+  console.log(e.message);
+  console.log(`> ${parsed.line} (at ${parsed.stacks[0].loc})`);
+}
+
+export { parse, emit };
+```
+
+이제 잘 작동하는지만 보자.
+
+```ts
+import { emit } from './parse';
+
+try {
+  const name: string = '🐒';
+
+  throw new Error(`Hello ${name}`);
+} catch (e) {
+  emit(e, './dist/index.js.map');
+}
+```
+
+```bash
+D:\error-tracking> node dist/index.js
+```
+
+```txt
+Hello 🐒
+ (at D:\error-tracking\src\index.ts:6:8)
+```
+
+완벽하다.
+
+원래같았으면 오류가 발생한 곳에 가면 알아볼 수 없을정도로 압축된 코드밖에 안보였는데  
+이젠 오류가 발생한 지점을 원본 파일에서 콕 집어서 보여준다. 아주 좋다.

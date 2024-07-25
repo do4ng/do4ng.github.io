@@ -1,9 +1,14 @@
+'use client';
+
 /* eslint-disable @next/next/no-page-custom-font */
 
 import '../styles/global.scss';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
 import { DefaultSeo } from 'next-seo';
+import { useEffect, useState } from 'react';
 
 const DEFAULT_SEO = {
   title: 'do4ng',
@@ -26,23 +31,45 @@ const DEFAULT_SEO = {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isScrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      if (scrollTop > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    });
+  });
+
   return (
     <>
       <DefaultSeo {...DEFAULT_SEO}></DefaultSeo>
-      <div className="root">
-        <div className="header">
-          <div className="name">
-            <Link href="/">DOLMIN</Link>
-          </div>
-          <div className="items">
-            <Link href="/tags">
-              <i className="ri-hashtag"></i>
-            </Link>
-            <Link href="/about">
-              <i className="ri-at-line"></i>
-            </Link>
+
+      <div
+        className={`header-container ${
+          usePathname().startsWith('/post') ? 'fixed' : ''
+        } ${isScrolled ? 'scrolled' : ''}`}
+      >
+        <div className="header-bg">
+          <div className={`header`}>
+            <div className="name">
+              <Link href="/">🦄🐒</Link>
+            </div>
+            <div className="items">
+              <Link href="/tags">
+                <i className="ri-hashtag"></i>
+              </Link>
+              <Link href="/about">
+                <i className="ri-at-line"></i>
+              </Link>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="root">
         <div className="container">
           <Component {...pageProps} />
         </div>

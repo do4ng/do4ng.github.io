@@ -1,24 +1,24 @@
-$light-gray: #d6d6d6b2;
-$gray: #bdbdbd;
-$dark-gray: #8b8b8bd7;
-$darker-gray: #575757d7;
+$light-gray: #2d2d2d; // Adjusted for dark mode
+$gray: #4a4a4a; // Reassigned with a darker shade
+$dark-gray: #6e6e6e;
+$darker-gray: #a3a3a3;
 
-$gray: #dfdfdf;
+$gray: #3f3f3f; // Updated from #dfdfdf to a darker shade
 
-$text-blue: #394c74;
-$text-dark: #3e4147;
+$text-blue: #c5d1ff; // Lighter blue for text on dark background
+$text-dark: #c1c3c7; // Lightened for dark background
 
-$link-blue-light: #9198ff;
-$link-blue: #0969da;
-$link-blue-dark: #4c60d4;
+$link-blue-light: #5363b6;
+$link-blue: #539bf5;
+$link-blue-dark: #4085da;
 
-$primary-100: #0072c6;
-$primary-200: #5aa0f9;
-$primary-300: #caffff;
-$accent-100: #00b0f0;
-$accent-200: #00548d;
-$text-100: #32374e;
-$text-200: #708090;
-$bg-100: #ffffff;
-$bg-200: #f5f5f5;
-$bg-300: #cccccc;
+$primary-100: #4c9fe2; // Lightened primary color for visibility
+$primary-200: #317acc; // Darkened slightly for contrast
+$primary-300: #003b3b; // Adjusted to be darker
+$accent-100: #339ecc; // Slightly darker than original accent
+$accent-200: #00a3e6; // Lightened to stand out
+$text-100: #dee1ec; // Lightened for readability
+$text-200: #ced5da; // Slightly lighter for readability
+$bg-100: #1a1920; // Dark background
+$bg-200: #2a2a2a; // Darker gray background
+$bg-300: #4d4d4d; // Dark gray for intermediate sections

@@ -3,45 +3,50 @@
 .posts {
   margin-top: 55px;
   max-width: 100%;
+}
+
+.post-list {
   display: flex;
   flex-wrap: wrap;
 }
 
 .post-card {
-  width: 260px;
+  width: 30%;
   height: 255px;
   margin: 20px 10px;
   transition: all ease 0.1s 0s;
+}
+
+.post-button {
+  display: block;
+  position: relative;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+  background-color: $bg-100;
+
+  text-align: left;
+
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+
+  cursor: pointer;
+  position: relative;
 
   img {
     top: 0;
     width: 100%;
-    border-radius: 10px 10px 0 0;
-    object-fit: cover;
-  }
-
-  button {
-    display: block;
-    position: relative;
-  }
-
-  .post-button {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    border: solid 1px $gray;
     border-radius: 10px;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: all ease 0.3s 0s;
+  }
 
-    background-color: $bg-100;
-
-    text-align: left;
-
-    padding: 0;
-    margin: 0;
-
-    width: 100%;
-    height: 100%;
-
-    cursor: pointer;
-    position: relative;
+  img:hover {
+    opacity: 1;
   }
 
   .post-button-detail {
@@ -49,11 +54,6 @@
   }
 
   .post-button-tags {
-    position: absolute;
-    bottom: 0px;
-
-    border-top: 1.5px solid $gray;
-
     width: 100%;
 
     a {
@@ -101,5 +101,52 @@
 }
 
 .post-card:hover {
+  transform: translate(0, -2px);
+}
+
+.post-card-big {
+  width: 100%;
+  margin: 70px 10px;
+  transition: all ease 0.1s 0s;
+
+  img {
+    top: 0;
+    width: 60%;
+    margin-right: 25px;
+    border-radius: 18px;
+    object-fit: cover;
+  }
+
+  button {
+    display: block;
+    position: relative;
+  }
+
+  .post-button {
+    display: flex;
+  }
+
+  .post-button-tags {
+    a {
+      font-size: 0.796rem;
+    }
+  }
+
+  h3 {
+    padding-top: 50px;
+    font-size: 1.65rem;
+    font-weight: 700;
+  }
+
+  .post-detail {
+    font-size: 1rem;
+  }
+
+  .tags a {
+    font-size: 0.925rem;
+  }
+}
+
+.post-card-big:hover {
   transform: translate(0, -2px);
 }

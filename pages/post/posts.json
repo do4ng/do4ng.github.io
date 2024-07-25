@@ -1,10 +1,19 @@
 {
+  "번들된-파일에서-오류-추적하기": {
+    "name": "2024-07-24",
+    "title": "번들된 파일에서 오류 추적하기",
+    "date": "2024-07-24",
+    "tags": ["javascript", "testing", "dev"],
+    "description": "",
+    "image": "/img/2024-07-24.png",
+    "img_from": "bg from <a href=\"https://unsplash.com/\">Unsplash</a>에 있는 <a href=\"https://unsplash.com/ko/@boliviainteligente\">@BoliviaInteligente</a>의 사진"
+  },
   "새로운-문서": {
     "name": "2023-11-23",
     "title": "새로운 문서",
     "date": "2023-11-23",
     "tags": ["ui", "next"],
-    "description": "",
+    "description": "vitepress에서 탈출하고 직접 문서 만들기",
     "image": "/assets/2023-11-23.png"
   },
   "Typescript에서-Javascript로-이주하기": {

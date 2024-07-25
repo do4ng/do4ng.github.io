@@ -1,7 +1,16 @@
 @import 'styles/var.scss';
 
 .post-container {
-  margin-top: 50px;
+  margin-top: 250px;
+  width: 720px;
+  margin: 100px auto;
+}
+
+.img-from {
+  text-align: center;
+  font-size: 11px;
+  margin-bottom: 50px;
+  color: $text-dark;
 }
 
 blockquote {
@@ -11,13 +20,13 @@ blockquote {
 }
 
 .preface {
-  width: 85%;
+  width: 95%;
   margin: 0 auto;
   padding-bottom: 45px;
   border-bottom: 2px solid $light-gray;
 
   .title {
-    font-weight: 600;
+    font-weight: 800;
     color: $text-100;
     font-size: 2.25em;
   }
@@ -65,12 +74,16 @@ blockquote {
 }
 
 .posttag {
-  background-color: #e2e8f0;
-  color: #718096;
+  background-color: #252729;
+  color: #98b1d6;
   margin: 0px 5px;
   padding: 3px 7px !important;
   border-radius: 5px;
   font-size: 14px;
+}
+
+.posttag:hover {
+  color: #7a93b8;
 }
 
 .post-layer {
@@ -78,11 +91,10 @@ blockquote {
 }
 
 .post {
-  margin-top: 40px;
   line-height: 200%;
-  color: $text-blue;
-  width: 85%;
-  margin: 40px auto;
+  color: $text-100;
+  width: 95%;
+  margin: 10px auto;
   position: relative;
 
   img {
@@ -107,7 +119,8 @@ blockquote {
   }
 
   img {
-    margin: 50px auto;
+    margin: 0 auto;
+    margin-top: 50px;
     display: block;
     max-height: 450px;
     text-align: center;
@@ -132,6 +145,18 @@ blockquote {
     a {
       color: #6b68ff;
     }
+  }
+
+  h2 {
+    font-size: 1.975rem;
+
+    a {
+      color: $link-blue-dark;
+    }
+  }
+
+  h3 {
+    font-size: 1.55rem;
   }
 }
 
@@ -244,16 +269,44 @@ nav {
   }
 
   li.active {
-    padding: 6px 10px;
     border-left: 1px solid $link-blue;
   }
 
   li.active > a {
-    padding-left: 1px;
     color: $link-blue;
   }
 
   li > a:hover {
     color: $text-200;
+  }
+}
+
+.post-id {
+  margin-top: 75px;
+
+  text-align: center;
+
+  a {
+    padding: 2px;
+    width: 35px;
+    height: 35px;
+
+    button {
+      width: 35px;
+      height: 35px;
+      border: none;
+      color: $primary-100;
+      transition: all ease 0.25s 0s;
+      background-color: $bg-100;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    button.active {
+      text-decoration: underline;
+      color: $link-blue-dark;
+    }
+    button:hover {
+      background-color: $bg-200;
+    }
   }
 }

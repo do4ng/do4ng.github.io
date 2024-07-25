@@ -12,7 +12,6 @@ module.exports = {
   },
   sassOptions: {
     fiber: false,
-    includePaths: [join(__dirname, 'styles')],
   },
   webpack(config, options) {
     config.resolve.fallback = { fs: false };
