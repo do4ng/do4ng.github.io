@@ -224,19 +224,13 @@
 }
 
 .hello {
-  max-width: 30%;
-  width: 30%;
-  height: 255px;
   max-height: 255px;
   margin: 20px 10px;
   transition: all ease 0.1s 0s;
   border-radius: 10px;
   border: 1px solid $bg-200;
-  background-color: $bg-200;
-  background: url('/assets/unsplash-yue-ma.jpg');
-  background-size: 150% 150%;
-  backdrop-filter: blur(15px);
 
+  padding: 25px 30px;
   .title {
     font-size: 14px;
     font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
