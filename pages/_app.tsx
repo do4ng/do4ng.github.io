@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
 /* eslint-disable @next/next/no-page-custom-font */
@@ -48,17 +49,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo {...DEFAULT_SEO}></DefaultSeo>
 
-      <div
-        className={`header-container ${
-          usePathname()?.startsWith('/post') ? 'fixed' : ''
-        } ${isScrolled ? 'scrolled' : ''}`}
-      >
+      <div className={`header-container fixed${isScrolled ? ' scrolled' : ''}`}>
         <div className="header-bg">
           <div className={`header`}>
             <div className="name">
               <Link href="/">🦄🐒</Link>
             </div>
             <div className="items">
+              <Link href="/project">
+                <i className="ri-instance-line"></i>
+              </Link>
               <Link href="/tags">
                 <i className="ri-hashtag"></i>
               </Link>

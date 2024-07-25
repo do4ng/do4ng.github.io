@@ -2,7 +2,7 @@
 'use client';
 
 /* eslint-disable react-hooks/rules-of-hooks */
-import type { NextPage } from 'next';
+import type { GetStaticPropsContext, NextPage } from 'next';
 import ErrorPage from 'next/error';
 import Posts from './post/posts.json';
 import PostCard from '../components/post-card';

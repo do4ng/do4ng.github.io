@@ -1,7 +1,7 @@
 @import 'styles/var.scss';
 
 .posts {
-  margin-top: 55px;
+  margin: 55px 0;
   max-width: 100%;
 }
 
@@ -149,4 +149,97 @@
 
 .post-card-big:hover {
   transform: translate(0, -2px);
+}
+
+.repos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.repo {
+  width: 27%;
+  max-width: 30%;
+  margin: 20px 10px;
+  word-wrap: break-word;
+  transition: all ease 0.1s 0s;
+
+  border: 1px solid $bg-200-light;
+  border-radius: 7px;
+  padding: 21px 15px;
+  box-shadow: rgba(34, 34, 34, 0.2) 0px 2px 8px 0px;
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    a {
+      color: $text-100;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    color: $text-300;
+  }
+
+  .info {
+    margin-top: 5px;
+    display: flex;
+
+    color: $text-100;
+    margin-right: 5px;
+    font-size: 12px;
+    .star {
+      padding-right: 7px;
+      display: flex;
+      i {
+        position: absolute;
+        color: $text-300;
+        margin-top: 1px;
+      }
+
+      p {
+        font-size: 12px;
+        margin: 0;
+        padding-left: 15px;
+      }
+    }
+  }
+}
+
+.language-typescript {
+  color: #5a9cf3;
+}
+.language-javascript {
+  color: #cab330;
+}
+.language-svelte,
+.language-html {
+  color: #f36262;
+}
+
+.hello {
+  max-width: 30%;
+  width: 30%;
+  height: 255px;
+  max-height: 255px;
+  margin: 20px 10px;
+  transition: all ease 0.1s 0s;
+  border-radius: 10px;
+  border: 1px solid $bg-200;
+  background-color: $bg-200;
+  background: url('/assets/unsplash-yue-ma.jpg');
+  background-size: 150% 150%;
+  backdrop-filter: blur(15px);
+
+  .title {
+    font-size: 14px;
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
+      'Liberation Mono', 'Courier New', monospace;
+  }
 }
