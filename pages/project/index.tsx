@@ -1,10 +1,9 @@
-import { GetStaticPropsContext } from 'next';
 import { compileMdx } from '../../mdx/compile';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { Content } from '../../mdx/content';
 
-export async function getStaticProps(ctx: GetStaticPropsContext) {
+export async function getStaticProps() {
   let markdown;
   if (process.env.NODE_ENV === 'development') {
     markdown = readFileSync(join(process.cwd(), 'posts', `${'0-hello'}.mdx`)).toString();

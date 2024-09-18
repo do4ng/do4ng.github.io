@@ -27,14 +27,19 @@ const Home: NextPage = () => {
     <>
       <Head>{slug ? <title>#{slug} - do4ng</title> : <></>}</Head>
       <NextSeo title={`#${slug}`} description={slug as string}></NextSeo>
-      <div className="directory">
-        #<strong>{slug}</strong>
-      </div>
       <div className="posts">
-        {posts.map((post) => (
-          // eslint-disable-next-line react/jsx-key
-          <PostCard data={rawPosts[post]} key={post}></PostCard>
-        ))}
+        <div className="directory">
+          #<strong style={{ textTransform: 'capitalize' }}>{slug as string}</strong>
+          <span style={{ color: '#5a7fe4', paddingLeft: '5px' }}>
+            ({posts.length}개의 글)
+          </span>
+        </div>
+        <div className="post-list">
+          {posts.map((post) => (
+            // eslint-disable-next-line react/jsx-key
+            <PostCard data={rawPosts[post]} key={post}></PostCard>
+          ))}
+        </div>
       </div>
     </>
   );

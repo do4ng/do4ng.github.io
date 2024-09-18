@@ -6,7 +6,6 @@
 import '../styles/global.scss';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import { DefaultSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
