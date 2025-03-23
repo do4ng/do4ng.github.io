@@ -1,0 +1,186 @@
+재미로 만드는 백엔드 프레임워크가 있는데 여기서 typescript 파일을 javascript로 변환해주는 작업이 필요하다.  
+원래는 esbuild를 써서 컴파일했는데 속도는 빠르지만 뭔가 내가 원하는 그림이 나오질 않아서 내 입맛대로 번들러를 만들었다.
+
+## 목표
+
+패키지 이름은 serpack인데 서버 모듈을 컴파일한다는 뜻으로 serpack(server + pack)으로 지었다.  
+참고로 자체 컴파일러를 만들어서 사용하는 것이 아니라 swc를 컴파일러로 사용하고 그 위에 번들링과 같은 추가 기능을 넣은 것이다.
+목표는 이름에서 알 수 있듯이 서버 모듈을 빠르게 컴파일하는 것이다.
+
+serpack에서는 esbuild말고 swc를 매인 컴파일러로 사용하는데 그 이유가 swc가 파싱 기능을 제공하기 때문이다.  
+번들링 과정 중에 외부 dependency가 아닌 로컬 파일이면 최종 코드에 포함시키는 코드가 있는데 이 과정에서 ast 분석이 필요하다.
+처음에는 esbuild로 컴파일하고 acorn으로 ast 분석을 할려고 했는데 살짝 속도가 마음에 들지 않아서 swc로 변경하였다.
+
+## 설치
+
+npm으로 serpack을 설치할 수 있다.
+
+```bash
+npm i --save-dev serpack
+```
+
+사용 방법은 다음과 같다.
+
+다음과 같은 샘플 코드가 있다고 해보자.
+
+- `src/index.ts`
+
+```ts
+// src/index.ts
+import { sum } from '../lib/sum';
+
+console.log(sum(1, 2));
+```
+
+- `lib/sum.ts`
+
+```ts
+// lib/sum.ts
+export function sum(a: number, b: number): number {
+  return a + b;
+}
+```
+
+## 사용법
+
+1. **CLI로 사용하기**
+
+CLI는 TypeScript 코드를 실행하는 기능 위주로 만들어졌다.
+
+```bash
+serpack ./src/index.ts
+```
+
+2. **API로 사용하기**
+
+```ts
+import { join } from 'path';
+import { compile } from 'serpack';
+
+compile(join(process.cwd(), 'src/index.ts')).then(({ code }) => {
+  console.log(code);
+});
+```
+
+결과는 이런식이다.
+
+```js
+(function (modules) {
+  var __serpack_module_cache__ = {};
+  function __serpack_require__(id) {
+    if (!id.startsWith('sp:')) return require(id);
+    if (__serpack_module_cache__[id.slice(3)])
+      return __serpack_module_cache__[id.slice(3)];
+    const module = { exports: {} };
+    __serpack_module_cache__[id.slice(3)] = '__serpack_module_pending__';
+    modules[id.slice(3)].call(
+      module.exports,
+      __serpack_require__,
+      require,
+      module,
+      module.exports
+    );
+    __serpack_module_cache__[id.slice(3)] = module.exports;
+    return module.exports;
+  }
+  module.exports = __serpack_require__('sp:0');
+})({
+  /* \src\index.ts */ 0: function (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports
+  ) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      console.log((0, __serpack_require__('sp:1').sum)(1, 2));
+  },
+  /* \lib\sum.ts */ 1: function (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports
+  ) {
+    'use strict';
+    function e(e, t) {
+      return e + t;
+    }
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      Object.defineProperty(exports, 'sum', {
+        enumerable: !0,
+        get: function () {
+          return e;
+        },
+      });
+  },
+});
+```
+
+webpack 번들링 결과를 참고해서 설계하였다.
+
+## runtime 모드
+
+위 결과 코드를 보면 알 수 있듯이 번들링된 코드의 용량은 아주 쓸데없이 크다.
+
+그래서 이 문제를 살짝이라도 해결할 수 있도록 runtime 모드를 만들었다.
+
+```js
+var __serpack_env__ = { target: 'node' };
+process.env.__RUNTIME__ = JSON.stringify(__serpack_env__);
+module.exports = {
+  /* src\index.ts */ 0: function (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports
+  ) {
+    'use strict';
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      console.log((0, __serpack_require__('sp:1').sum)(1, 2));
+  },
+  /* lib\sum.ts */ 1: function (
+    __serpack_require__,
+    __non_serpack_require__,
+    module,
+    exports
+  ) {
+    'use strict';
+    function e(e, t) {
+      return e + t;
+    }
+    Object.defineProperty(exports, '__esModule', { value: !0 }),
+      Object.defineProperty(exports, 'sum', {
+        enumerable: !0,
+        get: function () {
+          return e;
+        },
+      });
+  },
+};
+```
+
+런타임 모드를 키지 않았을 때와 비교하면 확실히 작아보인다.
+
+다만 코드를 실행하기 위해 필요한 함수들을 완전히 뺀 것이기 때문에 별도의 실행 코드가 필요하다.
+
+```js
+import { createRuntime } from 'serpack/runtime';
+
+const runtime = createRuntime('./output.js');
+
+runtime.execute();
+```
+
+https://github.com/zely-js/zely/blob/715ce15a98a81398b1b8389822fded9faeb2688d/packages/zely-js-core/src/node/loader/index.ts#L38
+
+## 프레임워크에 적용
+
+원래 목적이 내 백엔드 프레임워크에 있는 esbuild 로더를 대체할려고 만든 것이기 때문에
+바로 [zely](https:/zely.vercel.app)에 적용하였다.
+
+아직 테스트를 많이 거치지 않았고 모든 상황에서 잘 동작하는지도 의문이기 때문에
+아직 완전 대체하진 못했고 `--serpack` 플레그를 활성화해야 사용할 수 있도록 살짝 숨겨놓았다.
+
+```bash
+zely dev --serpack
+```
