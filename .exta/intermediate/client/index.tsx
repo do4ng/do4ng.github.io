@@ -1,0 +1,1 @@
+export { default as _page } from "../../../pages/index.tsx";

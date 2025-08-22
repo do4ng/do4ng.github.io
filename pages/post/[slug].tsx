@@ -1,12 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import { NextSeo } from 'next-seo';
-import timeCounting from 'time-counting';
-
-import { GetStaticPropsContext } from 'next';
+import { Link } from 'exta/components';
 
 import { useRef, useState } from 'react';
 
@@ -18,21 +12,9 @@ import { Content } from '../../mdx/content';
 import { compileMdx } from '../../mdx/compile';
 import { LoadTags } from '../tag/[slug]';
 import React from 'react';
+import { useLocation } from '$exta-router';
 
 const touched = { current: false };
-
-// https://github.com/vercel/next.js/issues/52711
-// https://github.com/memos-pub/memos.pub/blob/a3babb1f149f05c43012278331f885d81f5fcfac/lib/mdx/plugins/code.ts
-
-const getShikiPath = (): string => {
-  return join(process.cwd(), '/shiki');
-};
-
-const touchShikiPath = (): void => {
-  if (touched.current) return;
-  readdir(getShikiPath(), () => {});
-  touched.current = true;
-};
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -79,8 +61,8 @@ export const components = {
   h6: (props: any) => {
     return <h6 {...props}></h6>;
   },
-  div: (props: any) => {
-    if (props['data-rehype-pretty-code-fragment'] === '') {
+  figure: (props: any) => {
+    if (props['data-rehype-pretty-code-figure'] === '') {
       if (props.children[0]?.props['data-rehype-pretty-code-title'] !== '') {
         const lang = props.children.props['data-language'];
         const [copy, setCopy] = useState('copy');
@@ -186,26 +168,20 @@ export function cleanTitle(title: string = ''): string {
   return title.replace(/ /g, '-').trim().toLocaleLowerCase();
 }
 
-export function getStaticPaths() {
-  return {
-    paths: Object.keys(postList).map((post) => ({
-      params: { slug: post.toLowerCase() },
-    })),
-    fallback: false,
-  };
+export function getStaticParams() {
+  return Object.keys(postList).map((post) => ({
+    slug: post.toLowerCase(),
+  }));
 }
 
-export async function getStaticProps(ctx: GetStaticPropsContext) {
-  touchShikiPath();
+export async function getStaticProps({ params }) {
   const rawPost = Object.keys(postList).filter((value) => {
-    return cleanTitle(value) === cleanTitle(ctx.params.slug as string);
+    return cleanTitle(value) === cleanTitle(decodeURI(params.slug as string));
   });
 
   if (rawPost.length === 0) {
     return {
-      props: {
-        markdown: null,
-      },
+      markdown: null,
     };
   }
 
@@ -219,91 +195,60 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
     const markdown = await res.text();
     */
 
-    let markdown;
-    if (process.env.NODE_ENV === 'development') {
-      markdown = readFileSync(
-        join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
-      ).toString();
-    } else {
-      try {
-        const res = await fetch(
-          `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${
-            postList[rawPost[0]].name
-          }.mdx`
-        );
-        markdown = await res.text();
-      } catch (e) {
-        console.error(e);
-        return {
-          props: {
-            markdown: null,
-            reason: e,
-          },
-        };
-      }
-    }
+    const markdown = readFileSync(
+      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
+    ).toString();
 
     const compiled = await compileMdx(markdown);
-
     return {
-      props: {
-        markdown,
-        compiled,
-        data: postList[rawPost[0]],
-      },
+      markdown,
+      compiled,
+      data: postList[rawPost[0]],
     };
   } catch (e) {
     console.error(e);
     return {
-      props: {
-        markdown: null,
-        reason: e,
-      },
+      markdown: null,
+      reason: e,
     };
   }
 }
 
 const Post = ({
-  data,
-  reason,
-  markdown,
-  compiled,
+  params,
+  props,
 }: {
-  data: PostType;
-  markdown: string;
-  compiled: any;
-  reason: string;
+  params: { slug: string };
+  props: {
+    data: PostType;
+    markdown: string;
+    compiled: any;
+    reason: string;
+  };
 }) => {
-  const router = useRouter();
-  const { slug } = router.query;
+  const { data, compiled } = props;
+  let { slug } = params;
+
+  slug = decodeURI(slug);
 
   const anotherPosts: PostType[] = LoadTags(data.tags[0]).map((t) => ({
     ...postList[t],
     origin: t,
   })) as any;
 
-  if (markdown === null) {
+  if (props.markdown === null) {
     return <>404</>;
   }
 
   return (
     <>
-      <Head>
-        <title>{(slug as string).replace(/-/g, ' ')} - do4ng</title>
-        <meta name="author" content="do4ng"></meta>
-        <meta name="keyword" content={`${data.tags.join(', ')}`}></meta>
-      </Head>
-      <NextSeo
-        title={`${(slug as string).replace(/-/g, ' ')}`}
-        description={data.description}
-      ></NextSeo>
       <div className="post-container">
         <div className="preface">
           <div className="title">{data.title}</div>
           <div className="post-items">
             <div className="name">do4ng</div>
             <div className="border"> • </div>
-            <div className="date">{timeCounting(data.date)}</div>
+            <div className="date">{data.date}</div>
           </div>
           <div className="tags">
             {data.tags?.map((tag) => (
@@ -322,7 +267,9 @@ const Post = ({
               dangerouslySetInnerHTML={{ __html: data.img_from || '' }}
             ></p>
 
-            <Content content={compiled}></Content>
+            <main>
+              <Content content={compiled}></Content>
+            </main>
 
             <div className="other-posts">
               <h4>#{data.tags[0]}의 다른 글</h4>
@@ -338,6 +285,7 @@ const Post = ({
                             : null
                         }
                         href={`/post/${(post as any).origin}`}
+                        prefetch={false}
                       >
                         {post.title}
                       </Link>

@@ -27,13 +27,11 @@ export async function getStaticProps() {
   const compiled = await compileMdx(markdown);
 
   return {
-    props: {
-      compiled,
-    },
+    compiled,
   };
 }
 
-export default function Repos({ compiled }: { compiled: any }) {
+export default function Repos({ props: { compiled } }: { props: { compiled: any } }) {
   return (
     <>
       <h1 style={{ marginTop: '125px', paddingLeft: '10px' }}>Projects</h1>

@@ -1,4 +1,12 @@
 {
+  "SSG-프레임워크-만들기": {
+    "name": "2025-03-23",
+    "title": "SSG 프레임워크 만들기",
+    "date": "2025-08-22",
+    "tags": ["javascript", "dev", "ssg"],
+    "image": "/assets/ssg.gif",
+    "description": "일지 #1"
+  },
   "번들러를-만들었다": {
     "name": "2025-01-19",
     "title": "번들러를 만들었다",

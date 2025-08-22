@@ -1,10 +1,7 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import ErrorPage from 'next/error';
 import PostCard from '../../components/post-card';
 import rawPosts from '../post/posts.json';
-import Head from 'next/head';
-import { NextSeo } from 'next-seo';
+import { removeArrayDup } from '../tags';
+import posts from '../post/posts.json';
 
 export const LoadTags = (slug: string | string[]) => {
   const posts = Object.keys(rawPosts).filter((post) =>
@@ -14,19 +11,23 @@ export const LoadTags = (slug: string | string[]) => {
   return posts;
 };
 
-const Home: NextPage = () => {
-  const router = useRouter();
-  if (!router.isFallback && !rawPosts) {
-    return <ErrorPage statusCode={404} />;
-  }
-  const { slug } = router.query;
+export function getStaticParams() {
+  let raw = [];
 
+  Object.keys(posts).forEach((post) => {
+    raw = [...raw, ...(posts[post].tags || [])];
+  });
+
+  const { result } = removeArrayDup(raw);
+
+  return result.map((r) => ({ slug: r }));
+}
+
+const Home = ({ params: { slug } }) => {
   const posts = LoadTags(slug);
 
   return (
     <>
-      <Head>{slug ? <title>#{slug} - do4ng</title> : <></>}</Head>
-      <NextSeo title={`#${slug}`} description={slug as string}></NextSeo>
       <div className="posts">
         <div className="directory">
           #<strong style={{ textTransform: 'capitalize' }}>{slug as string}</strong>

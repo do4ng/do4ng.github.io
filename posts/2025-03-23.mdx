@@ -1,0 +1,108 @@
+React 기반 SSG (정적 사이트 생성기)를 만들고 있다.
+
+## 동기
+
+큰 목적은 없고, nextjs를 사용하는 정말 간단한 블로그와 문서를 빌드도 아니고 개발 서버를 구동하는데 10초가 넘게 걸리는게 답답해서 제작하게 되었다.
+
+## 계획
+
+[webpack](https://webpack.js.org/) 기반인 nextjs와 다르게 [vite](https://vite.dev/) + [esbuild](https://esbuild.github.io/) 기반으로 만들 것이다.
+
+Nextjs 기반 내 개인 프로젝트를 이번에 만드는 프레임워크로 전환하는 것이 목적이기 때문에 최대한 Nextjs와 비슷하게 기능을 구현하는 중이다.
+
+```tsx
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+export function getStaticProps() {
+  const file = readFileSync(join(process.cwd(), 'package.json')).toString();
+  return { file };
+}
+
+export default function () {
+  return <>Hello</>;
+}
+```
+
+함수 이름 후보가 여러가지 있었는데 솔직히 nextjs에서 사용하는 함수명이 제일 직관적인 것 같아서 이걸로 정했다.
+
+### Tree Shaking
+
+위 코드에서 볼 수 있듯이 한 파일 안에 서버 + 클라이언트 코드를 모두 작성한다.  
+그래서 서버와 클라이언트 코드를 분리하는 작업을 해야하는데 ast 구문까지 해가면서 분리하고 싶진 않아서 tree shaking을 사용하기로 했다.
+
+tree shaking은 사용하지 않는 코드 (데드 코드라 부르는 것 같다)를 제거하는 작업인데 이걸 이용하면 서버와 클라이언트를 분리할 수 있을 것 같았다.
+
+예를 들어 `a.tsx`가 있다고 해보자.
+
+```tsx
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+export function getStaticProps() {
+  const file = readFileSync(join(process.cwd(), 'package.json')).toString();
+  return { file };
+}
+
+export default function () {
+  return <>Hello</>;
+}
+```
+
+이 것을 컴파일러에 집어 넣으면
+
+`.cache/intermediate/client/a.tsx`와 `.cache/intermediate/server/a.ts`가 생성이 된다.
+
+각각의 내용은 이렇다.
+
+```tsx
+// a.tsx
+export { default as _page } from '../../../pages/a.tsx';
+```
+
+```ts
+// a.ts
+export { getStaticProps } from '../../../pages/a.tsx';
+```
+
+이제 이거를 tree shaking 옵션을 킨 상태로 esbuild로 번들하기만 하면 된다.
+
+그러면 똑같은 파일인 `a.tsx`에서 클라이언트 코드와 서버 코드를 불러오는데, 클라이언트 코드에서는 서버 코드를 사용하지 않으니 esbuild가 죽은 코드로 간주하게 된다.
+
+### 문제점
+
+근데 문제가 생겼다.
+
+tree shaking에 대해 알아보다 보면 `sideEffects`라는 옵션이 있는데 대충 죽은 줄만 알았던 코드가 알고보니 중요한 코드였다를 사전에 방지하는 옵션이다.
+
+예를 들어
+
+```ts
+// nothing.ts
+console.log('Here is nothing');
+
+export function a() {}
+```
+
+이라는 코드가 있고
+
+```ts
+// entry.ts
+import { a } from './nothing';
+// a 함수를 사용하지 않음
+```
+
+이런 코드가 있다 했을 때 `entry.ts`를 트리 세이킹을 하게 되면 `a`라는 함수가 사용되지 않으니 죽은 코드로 취급되어 import 구문 자체를 없앨 가능성이 생긴다. (즉 Here is nothing이라는 문구도 출력되지 않음)  
+그래서 그런지 esbuild는 애매하게 side effects를 처리하는데 이것때문에 클라이언트 코드에도 서버 전용 모듈을 삭제하지 않는 문제가 생겨버렸다. 그래서 내가 esbuild 플러그인으로 서버 전용 모듈의 side effects를 무시해라 라는 코드를 만들어서 이 문제를 해결하였다.
+
+## 진행 상황
+
+기본적인 기능들은 모두 완성하였다.
+
+```bash
+npm i --save-dev exta
+```
+
+로 써볼 수 있다.
+
+[문서](https://extajs.netlify.app/)도 만들었다. 원래 nextjs로 제작된 문서 템플릿인데, 이번 프레임워크로 전환하는데 성공하였다.

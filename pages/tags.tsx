@@ -1,5 +1,4 @@
-import type { NextPage } from 'next';
-import Link from 'next/link';
+import { Link } from 'exta/components';
 import posts from './post/posts.json';
 
 export function removeArrayDup(arr: any[]) {
@@ -16,7 +15,7 @@ export function removeArrayDup(arr: any[]) {
   return { result, counts };
 }
 
-const Home: NextPage = () => {
+const Home = () => {
   let raw = [];
 
   Object.keys(posts).forEach((post) => {

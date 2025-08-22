@@ -1,0 +1,1 @@
+export { getStaticParams } from "../../../../pages/tag/[slug].tsx";

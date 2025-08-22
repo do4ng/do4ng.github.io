@@ -2,19 +2,16 @@
 'use client';
 
 /* eslint-disable react-hooks/rules-of-hooks */
-import type { NextPage } from 'next';
-import ErrorPage from 'next/error';
 import Posts from './post/posts.json';
 import PostCard from '../components/post-card';
-import Head from 'next/head';
-import { NextSeo } from 'next-seo';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { cleanTitle } from './post/[slug]';
+
+import { Link, Image } from 'exta/components';
+import { useSearchQuery } from '$exta-router';
 
 const lengthPage = 6;
 
-const Home: NextPage = () => {
+const Home = ({}) => {
   const postsArr = Object.keys(Posts).slice(1);
   const posts = {};
   const data = Posts[Object.keys(Posts)[0]];
@@ -23,12 +20,7 @@ const Home: NextPage = () => {
     posts[post] = Posts[post];
   }
 
-  if (!posts) {
-    return <ErrorPage statusCode={404} />;
-  }
-
-  const searchParams = useSearchParams();
-
+  const searchParams = useSearchQuery();
   const page = searchParams.get('page');
 
   const showPosts =
@@ -43,10 +35,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Home - do4ng</title>
-      </Head>
-      <NextSeo description="do4ng"></NextSeo>
       <div className="posts">
         {!page || Number(page || -1) === 0 ? (
           <>
@@ -54,10 +42,10 @@ const Home: NextPage = () => {
               <Link
                 href={`/post/${cleanTitle(data.title)}`}
                 className="no-a"
-                legacyBehavior
+                prefetch={false}
               >
                 <div className="post-button">
-                  <img src={data.image} alt="img"></img>
+                  {data.image ? <Image src={data.image} alt="img"></Image> : <div></div>}
                   <div className="post-button-detail">
                     <h3>{data.title}</h3>
                     <div className="post-detail">{data.description}</div>
@@ -66,7 +54,7 @@ const Home: NextPage = () => {
                       <div className="tags">
                         {data.tags?.map((tag) => (
                           // eslint-disable-next-line react/jsx-key
-                          <Link href={`/tag/${tag}`} legacyBehavior key={tag}>
+                          <Link href={`/tag/${tag}`} prefetch={false} key={tag}>
                             <a>#{tag}</a>
                           </Link>
                         ))}

@@ -1,0 +1,1 @@
+export { default as _page } from "../../../../pages/post/[slug].tsx";

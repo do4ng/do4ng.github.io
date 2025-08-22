@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
+import { Link, Image } from 'exta/components';
 import { cleanTitle, PostType } from '../pages/post/[slug]';
 
 export default function PostCard(props: { data: PostType }) {
@@ -10,10 +10,14 @@ export default function PostCard(props: { data: PostType }) {
         <Link
           href={`/post/${cleanTitle(props.data.title)}`}
           className="no-a"
-          legacyBehavior
+          prefetch={false}
         >
           <div className="post-button">
-            <img src={props.data.image} alt="img"></img>
+            {props.data.image ? (
+              <Image src={props.data.image} alt="img"></Image>
+            ) : (
+              <div></div>
+            )}
             <div className="post-button-detail">
               <h3>{props.data.title}</h3>
               <div className="post-detail">{props.data.description}</div>
@@ -22,7 +26,7 @@ export default function PostCard(props: { data: PostType }) {
               <div className="tags">
                 {props.data.tags?.map((tag) => (
                   // eslint-disable-next-line react/jsx-key
-                  <Link href={`/tag/${tag}`} legacyBehavior key={tag}>
+                  <Link href={`/tag/${tag}`} prefetch={false} key={tag}>
                     <a>#{tag}</a>
                   </Link>
                 ))}
