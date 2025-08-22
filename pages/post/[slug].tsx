@@ -1,20 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Link } from 'exta/components';
+import { Head, Link } from 'exta/components';
 
 import { useRef, useState } from 'react';
 
 import postList from './posts.json';
 import { join } from 'path';
-import { readFileSync, readdir } from 'fs';
+import { readFileSync } from 'fs';
 
 import { Content } from '../../mdx/content';
 import { compileMdx } from '../../mdx/compile';
 import { LoadTags } from '../tag/[slug]';
-import React from 'react';
-import { useLocation } from '$exta-router';
-
-const touched = { current: false };
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -242,6 +238,13 @@ const Post = ({
 
   return (
     <>
+      <Head>
+        <title>{data.title} - do4ng</title>
+        <meta name="description" content={data.description} />
+        <meta name="keywords" content={data.tags.join(',')} />
+        <meta property="og:title" content={data.title} />
+        <meta property="og:description" content={data.description} />
+      </Head>
       <div className="post-container">
         <div className="preface">
           <div className="title">{data.title}</div>

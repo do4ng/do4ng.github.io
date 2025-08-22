@@ -8,8 +8,8 @@
     "noEmit": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["./*"]
     },

@@ -1755,10 +1755,10 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-exta@^0.0.1-beta.15:
-  version "0.0.1-beta.15"
-  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.15.tgz#aee8c3ceadd460fd6c8e62b5d8524f34cae82979"
-  integrity sha512-9CyfgnbrZ6vsPrzp7yjI7zIzMXCa4Ce2FBiX7tbAuOcxEMs6n2uhoB1CviTvq5JwOTEeDs7aRtOJZQwRTZex6w==
+exta@^0.0.1-beta.16:
+  version "0.0.1-beta.16"
+  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.16.tgz#39c92baa39416a8a6e9e28e2db3e3f31384b46c2"
+  integrity sha512-vqH4IoAwb1xd240wOSL1kPEZ+/jie+BzAoBs0NJ3487V5FCOP7BS53zwzcksKQhy+JvVTHowMcJ7kBHfV3gVMg==
   dependencies:
     colors "^1.4.0"
     esbuild "^0.25.8"

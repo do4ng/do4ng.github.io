@@ -33,7 +33,7 @@ const Home = () => {
         {result.map((tag) => (
           <>
             <div className="tag-item">
-              <Link href={`/tag/${tag}`} legacyBehavior>
+              <Link href={`/tag/${tag}`}>
                 <a className="tag-a posttag">
                   #{tag}
                   <span className="tag-count">({counts[tag]})</span>

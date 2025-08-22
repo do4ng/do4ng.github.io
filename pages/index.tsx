@@ -6,7 +6,7 @@ import Posts from './post/posts.json';
 import PostCard from '../components/post-card';
 import { cleanTitle } from './post/[slug]';
 
-import { Link, Image } from 'exta/components';
+import { Link, Image, Head } from 'exta/components';
 import { useSearchQuery } from '$exta-router';
 
 const lengthPage = 6;
@@ -35,6 +35,9 @@ const Home = ({}) => {
 
   return (
     <>
+      <Head>
+        <title>Home - do4ng</title>
+      </Head>
       <div className="posts">
         {!page || Number(page || -1) === 0 ? (
           <>

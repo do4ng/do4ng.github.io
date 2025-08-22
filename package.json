@@ -12,7 +12,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@vitejs/plugin-react": "^5.0.0",
-    "exta": "^0.0.1-beta.15",
+    "exta": "^0.0.1-beta.16",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "1",
     "react": "18.2.0",
