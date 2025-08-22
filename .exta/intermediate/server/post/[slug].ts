@@ -1,1 +1,0 @@
-export { getStaticParams, getStaticProps } from "../../../../pages/post/[slug].tsx";
