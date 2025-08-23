@@ -1,5 +1,5 @@
 {
-  "SSG-프레임워크-만들기": {
+  "making-ssg-framework": {
     "name": "2025-03-23",
     "title": "SSG 프레임워크 만들기",
     "date": "2025-08-22",
@@ -7,7 +7,7 @@
     "image": "/assets/ssg.gif",
     "description": "일지 #1"
   },
-  "번들러를-만들었다": {
+  "i-made-a-bundler": {
     "name": "2025-01-19",
     "title": "번들러를 만들었다",
     "date": "2025-01-19",
@@ -15,7 +15,7 @@
     "description": "swc기반 번들러를 만들었다",
     "image": "/img/2025-01-19.png"
   },
-  "번들된-파일에서-오류-추적하기": {
+  "tracking-errors-in-bundled-files": {
     "name": "2024-07-24",
     "title": "번들된 파일에서 오류 추적하기",
     "date": "2024-07-24",
@@ -24,7 +24,7 @@
     "image": "/img/2024-07-24.png",
     "img_from": "bg from <a href=\"https://unsplash.com/\">Unsplash</a>에 있는 <a href=\"https://unsplash.com/ko/@boliviainteligente\">@BoliviaInteligente</a>의 사진"
   },
-  "새로운-문서": {
+  "new-document": {
     "name": "2023-11-23",
     "title": "새로운 문서",
     "date": "2023-11-23",
@@ -32,7 +32,7 @@
     "description": "vitepress에서 탈출하고 직접 문서 만들기",
     "image": "/assets/2023-11-23.png"
   },
-  "Typescript에서-Javascript로-이주하기": {
+  "migrating-from-typescript-to-javascript": {
     "name": "2023-10-07",
     "title": "Typescript에서 Javascript로 이주하기",
     "date": "2023-10-07",
@@ -40,7 +40,7 @@
     "description": "현재 Typescript의 문제점",
     "image": "/img/2023-10-07.png"
   },
-  "나만의-프론트엔드-라이브러리-만들기-(2)": {
+  "creating-my-own-frontend-library-2": {
     "name": "2023-09-30",
     "title": "나만의 프론트엔드 라이브러리 만들기 (2)",
     "date": "2023-09-30",
@@ -48,7 +48,7 @@
     "description": "복붙완료",
     "image": "/img/2023-09-29.png"
   },
-  "나만의-프론트엔드-라이브러리-만들기-(1)": {
+  "creating-my-own-frontend-library-1": {
     "name": "2023-09-29",
     "title": "나만의 프론트엔드 라이브러리 만들기 (1)",
     "date": "2023-09-29",
@@ -56,7 +56,7 @@
     "description": "짭엑트",
     "image": "/img/2023-09-29.png"
   },
-  "npm-패키지": {
+  "npm-packages": {
     "name": "2023-09-28",
     "title": "npm 패키지",
     "date": "2023-09-28",
@@ -64,7 +64,7 @@
     "description": "만든 npm 패키지들",
     "image": "/img/2023-09-28.png"
   },
-  "블로그-업데이트": {
+  "blog-update": {
     "name": "2023-09-27",
     "title": "블로그 업데이트",
     "date": "2023-09-27",
@@ -72,7 +72,7 @@
     "description": "별로 바뀐건 없다",
     "image": "/img/2023-09-27.png"
   },
-  "react에-ssr-적용하기": {
+  "applying-ssr-to-react": {
     "name": "2023-02-09",
     "title": "React에 SSR 적용하기",
     "date": "2023-02-09",

@@ -32,13 +32,13 @@ function MyApp({ children }) {
               <Link href="/">🦄🐒</Link>
             </div>
             <div className="items">
-              <Link href="/project">
+              <Link href="/project" key="project">
                 <i className="ri-instance-line"></i>
               </Link>
-              <Link href="/tags">
+              <Link href="/tags" key="tags">
                 <i className="ri-hashtag"></i>
               </Link>
-              <Link href="/about">
+              <Link href="/about" key="about">
                 <i className="ri-at-line"></i>
               </Link>
             </div>

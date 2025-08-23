@@ -43,7 +43,7 @@ const Home = ({}) => {
           <>
             <div className="post-card-big" key={data.date}>
               <Link
-                href={`/post/${cleanTitle(data.title)}`}
+                href={`/post/${Object.keys(Posts)[0]}`}
                 className="no-a"
                 prefetch={false}
               >
@@ -74,7 +74,7 @@ const Home = ({}) => {
         <div className="post-list">
           {showPosts.map((post) => (
             // eslint-disable-next-line react/jsx-key
-            <PostCard data={posts[post]} key={post}></PostCard>
+            <PostCard data={posts[post]} href={post} key={post}></PostCard>
           ))}
         </div>
       </div>

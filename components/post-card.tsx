@@ -2,16 +2,12 @@
 import { Link, Image } from 'exta/components';
 import { cleanTitle, PostType } from '../pages/post/[slug]';
 
-export default function PostCard(props: { data: PostType }) {
+export default function PostCard(props: { data: PostType; href: string }) {
   if (!props) return <></>;
   return (
     <>
       <div className="post-card" key={props.data.date}>
-        <Link
-          href={`/post/${cleanTitle(props.data.title)}`}
-          className="no-a"
-          prefetch={false}
-        >
+        <Link href={`/post/${props.href}`} className="no-a" prefetch={false}>
           <div className="post-button">
             {props.data.image ? (
               <Image src={props.data.image} alt="img"></Image>

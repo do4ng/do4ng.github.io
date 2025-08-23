@@ -38,7 +38,7 @@ const Home = ({ params: { slug } }) => {
         <div className="post-list">
           {posts.map((post) => (
             // eslint-disable-next-line react/jsx-key
-            <PostCard data={rawPosts[post]} key={post}></PostCard>
+            <PostCard data={rawPosts[post]} key={post} href={post}></PostCard>
           ))}
         </div>
       </div>

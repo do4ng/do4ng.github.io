@@ -279,7 +279,7 @@ const Post = ({
               <div className="other-posts-container">
                 {anotherPosts.map((post) => (
                   <>
-                    <div className="other-post">
+                    <div className="other-post" key={post.title}>
                       <Link
                         className={
                           (post as any).origin.toLowerCase() ===
