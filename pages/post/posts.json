@@ -1,11 +1,19 @@
 {
+  "making-ssg-framework-2": {
+    "name": "2025-08-24",
+    "title": "SSG 프레임워크 만들기 (2)",
+    "date": "2025-08-24",
+    "tags": ["javascript", "dev", "ssg"],
+    "image": "/img/2025-08-24.png",
+    "description": "블로그에 적용해보았다"
+  },
   "making-ssg-framework": {
     "name": "2025-03-23",
     "title": "SSG 프레임워크 만들기",
     "date": "2025-08-22",
     "tags": ["javascript", "dev", "ssg"],
     "image": "/assets/ssg.gif",
-    "description": "일지 #1"
+    "description": "기본 뼈대 만들기"
   },
   "i-made-a-bundler": {
     "name": "2025-01-19",

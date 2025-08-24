@@ -141,6 +141,8 @@ export const components = {
       </>
     );
   },
+
+  a: (props: any) => <Link {...props}></Link>,
 };
 
 export const server = dev ? 'http://localhost:3000' : 'https://do4ng.vercel.com';
