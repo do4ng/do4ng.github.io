@@ -76,7 +76,7 @@ button {
   display: absolute;
   top: 0;
   width: 100%;
-  background: rgba(26, 25, 32, 0.575);
+  background: #18181848;
   transition: all ease 0.25s 0s;
   z-index: 100;
 }
@@ -176,7 +176,8 @@ button {
 
 // code
 
-div[data-rehype-pretty-code-fragment] {
+div[data-rehype-pretty-code-fragment],
+div[data-rehype-pretty-code-figure] {
   margin: 30px 0;
 }
 

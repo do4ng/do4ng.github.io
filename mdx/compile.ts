@@ -19,6 +19,7 @@ export const compileMdx = async (content: string): Promise<string> => {
     development: false,
     rehypePlugins: [
       [
+        // @ts-ignore
         rehypePrettyCode,
         {
           keepBackground: false,

@@ -12,7 +12,7 @@
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@vitejs/plugin-react": "^5.0.0",
-    "exta": "^0.0.1-beta.19",
+    "exta": "^0.0.1-beta.23",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "1",
     "react": "18.2.0",
@@ -33,6 +33,7 @@
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "eslint": "8.23.0",
-    "typescript": "4.8.2"
+    "typescript": "4.8.2",
+    "vite-plugin-sitemap": "^0.8.2"
   }
 }

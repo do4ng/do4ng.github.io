@@ -1755,10 +1755,10 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-exta@^0.0.1-beta.19:
-  version "0.0.1-beta.19"
-  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.19.tgz#cf97f2fac58b0719089ab16421e608c5a1bb811b"
-  integrity sha512-0rpe1EyDX5tJFrG2YMw7dPCFWhOfEM8r2A7waRs/YnRZgcd4vkBaLTPX6iUbi119HszDiGzpQ0pdIp3fAfdq1w==
+exta@^0.0.1-beta.23:
+  version "0.0.1-beta.23"
+  resolved "https://registry.yarnpkg.com/exta/-/exta-0.0.1-beta.23.tgz#701d9d78244922d9a271dd8ebf3013c33c6f6863"
+  integrity sha512-N4y1LHDDwi65kehVWrjngG5tkopxw5KfGKRwMovlWxVlUrr93h0CU9GRKAX4v0snSBXaNQUETDhL5hc2XzH0pg==
   dependencies:
     colors "^1.4.0"
     esbuild "^0.25.8"
@@ -4179,6 +4179,11 @@ vfile@^6.0.0:
     "@types/unist" "^3.0.0"
     unist-util-stringify-position "^4.0.0"
     vfile-message "^4.0.0"
+
+vite-plugin-sitemap@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/vite-plugin-sitemap/-/vite-plugin-sitemap-0.8.2.tgz#4121168d331df1054bc4b2cff9de8f21cc0bd7af"
+  integrity sha512-bqIw6NVOXg6je81lzX8Lm0vjf8/QSAp8di8fYQzZ3ZdVicOm8+6idBGALJiy1R1FiXNIK8rgORO6HBqXyHW+iQ==
 
 vite@^7.0.6, vite@^7.1.2:
   version "7.1.2"

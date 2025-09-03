@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { exta } from 'exta';
 import react from '@vitejs/plugin-react';
+import Sitemap from 'vite-plugin-sitemap';
 
 export interface CompileOptions {
   /** @default {true} */

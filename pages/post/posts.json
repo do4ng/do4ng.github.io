@@ -1,4 +1,11 @@
 {
+  "making-ssg-framework-3": {
+    "name": "2025-09-03",
+    "title": "정적 사이트 생성기를 만들었다.",
+    "date": "2025-09-03",
+    "image": "/img/2025-09-03.png",
+    "tags": ["javascript", "dev", "ssg"]
+  },
   "making-ssg-framework-2": {
     "name": "2025-08-24",
     "title": "SSG 프레임워크 만들기 (2)",
