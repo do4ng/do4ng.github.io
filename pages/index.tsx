@@ -46,6 +46,7 @@ const Home = ({}) => {
                 href={`/post/${Object.keys(Posts)[0]}`}
                 className="no-a"
                 prefetch={false}
+                preload={true}
               >
                 <div className="post-button">
                   {data.image ? <Image src={data.image} alt="img"></Image> : <div></div>}
