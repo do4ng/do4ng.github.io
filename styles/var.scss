@@ -1,31 +1,38 @@
-$light-gray: #2d2d2d;
-$gray: #3f3f3f;
-$dark-gray: #6e6e6e;
-$darker-gray: #a3a3a3;
+/* Gray scale (UI 요소용) */
+$light-gray: #f5f5f5;
+$gray: #e0e0e0;
+$dark-gray: #bdbdbd;
+$darker-gray: #9e9e9e;
 
-$text-blue: #d0e4ff;
-$text-dark: #eeeeeecc;
+/* Text colors */
+$text-blue: #1f4fd8;
+$text-dark: #1a1a1acc;
 
-$link-blue-light: #7eb2ff;
-$link-blue: #4c94ff;
-$link-blue-dark: #5091f1;
+/* Link colors */
+$link-blue-light: #6fa4ff;
+$link-blue: #3b82f6;
+$link-blue-dark: #1e5ed6;
 
-$primary-100: #4c94ff;
-$primary-200: #7eb2ff;
-$primary-300: #d0e4ff;
+/* Primary */
+$primary-100: #3b82f6;
+$primary-200: #6fa4ff;
+$primary-300: #dbeafe;
 
-$accent-100: #74d1f6;
-$accent-200: #1b6a80;
-$accent-300: #1d5fb0;
+/* Accent */
+$accent-100: #38bdf8;
+$accent-200: #0e7490;
+$accent-300: #1d4ed8;
 
-$text-100: #eeeeeecc;
-$text-200: #d0d0d0;
-$text-300: #bbbbbbcc;
+/* Text scale */
+$text-100: #1a1a1acc;
+$text-200: #333333;
+$text-300: #555555cc;
 
-$bg-100: #181818;
-$bg-200: #1f1f1f;
-$bg-200-light: #2b2b2b75;
-$bg-200-dark: #121212;
-$bg-250: #272727;
-$bg-300: #2e2e2e;
-$bg-400: #444444;
+/* Backgrounds */
+$bg-100: #ffffff;
+$bg-200: #f7f7f7;
+$bg-200-light: #f0f0f075;
+$bg-200-dark: #e5e5e5;
+$bg-250: #ededed;
+$bg-300: #e0e0e0;
+$bg-400: #cfcfcf;

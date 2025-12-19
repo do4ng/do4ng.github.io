@@ -12,9 +12,10 @@
 }
 
 blockquote {
-  border-left: 3px solid $light-gray;
+  border-left: 3px solid $gray;
   padding-left: 15px;
   margin-left: 0;
+  color: $text-200;
 }
 
 .preface {
@@ -72,16 +73,16 @@ blockquote {
 }
 
 .posttag {
-  background-color: #252729;
-  color: #98b1d6;
-  margin: 0px 5px;
+  background-color: $bg-200;
+  color: $primary-100;
+  margin: 0 5px;
   padding: 3px 7px !important;
   border-radius: 5px;
   font-size: 14px;
 }
 
 .posttag:hover {
-  color: #7a93b8;
+  color: $primary-200;
 }
 
 .post-layer {

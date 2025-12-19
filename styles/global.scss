@@ -70,14 +70,15 @@ button {
 
 .header-container {
   border-bottom: 1px solid $bg-100;
+  background: $bg-100;
 }
 .header-container.fixed {
   position: fixed;
   display: absolute;
   top: 0;
   width: 100%;
-  background: #18181848;
-  transition: all ease 0.25s 0s;
+  background: #ffffff48;
+  transition: all ease 0.55s 0s;
   z-index: 100;
 }
 @keyframes reveal {
@@ -89,8 +90,9 @@ button {
 }
 .scrolled {
   -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: #ececec48 !important;
   backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid $bg-200 !important;
+  border-bottom: 1px solid $bg-300 !important;
 }
 
 .header {
@@ -219,7 +221,7 @@ div[data-rehype-pretty-code-title] {
   line-height: 1.15rem;
 
   pre {
-    background-color: #303030af;
+    background-color: #303030;
     margin: 0;
     padding: 0.85em 1.05rem;
     overflow: auto;
@@ -249,8 +251,8 @@ div[data-rehype-pretty-code-title] {
 :not(pre) > code {
   margin: 2px;
   padding: 3px 7px;
-  color: #c3c9fce0;
-  background-color: #333333dc;
+  color: #000000e0;
+  background-color: #c9c7c76e;
   letter-spacing: normal;
   border-radius: 6px;
 }

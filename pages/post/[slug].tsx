@@ -43,7 +43,17 @@ export const components = {
     return <h1 {...props}></h1>;
   },
   h2: (props: any) => {
-    return <h2 {...props}></h2>;
+    const text = props.children[1];
+
+    console.log();
+
+    const id = text.toLowerCase().replace(/\s+/g, '-');
+    return (
+      <h2 id={id} {...props.children.props}>
+        <a href={`#${id}`}>#</a>
+        {props.children}
+      </h2>
+    );
   },
   h3: (props: any) => {
     return <h3 {...props}></h3>;
@@ -142,7 +152,26 @@ export const components = {
     );
   },
 
-  a: (props: any) => <Link {...props}></Link>,
+  a: (props: any) => {
+    if (props.href.startsWith('http')) {
+      return <Link {...props} target="_blank" passHref={true}></Link>;
+    }
+
+    return (
+      <Link
+        {...props}
+        prefetch={false}
+        onClick={(e) => {
+          if (props.href.startsWith('#')) {
+            document.querySelector(props.href)?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }}
+      ></Link>
+    );
+  },
 };
 
 export const server = dev ? 'http://localhost:3000' : 'https://do4ng.vercel.com';
