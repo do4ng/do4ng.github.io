@@ -1,9 +1,23 @@
 {
+  "about-ai-usage": {
+    "name": "2025-12-22",
+    "title": "AI 사용에 대해",
+    "date": "2025-12-22",
+    "tags": ["note", "ai"],
+    "description": "."
+  },
+  "backend-framework-v2": {
+    "name": "2025-12-21",
+    "title": "서버 프레임워크를 다시 만들었다.",
+    "date": "2025-12-21",
+    "tags": ["dev", "backend"],
+    "description": "훨씬 빠름"
+  },
   "making-ssg-framework-3": {
     "name": "2025-09-03",
     "title": "정적 사이트 생성기를 만들었다.",
-    "date": "2025-09-03",
     "image": "/img/2025-09-03.png",
+    "date": "2025-09-03",
     "tags": ["javascript", "dev", "ssg"]
   },
   "making-ssg-framework-2": {

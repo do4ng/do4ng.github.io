@@ -43,14 +43,13 @@ export const components = {
     return <h1 {...props}></h1>;
   },
   h2: (props: any) => {
-    const text = props.children[1];
-
-    console.log();
+    const text = props.children.toString();
 
     const id = text.toLowerCase().replace(/\s+/g, '-');
+
     return (
       <h2 id={id} {...props.children.props}>
-        <a href={`#${id}`}>#</a>
+        <Link href={`#${id}`}>#</Link>
         {props.children}
       </h2>
     );
@@ -208,7 +207,7 @@ export async function getStaticProps({ params }) {
 
   if (rawPost.length === 0) {
     return {
-      markdown: null,
+      compiled: null,
     };
   }
 
@@ -228,14 +227,13 @@ export async function getStaticProps({ params }) {
 
     const compiled = await compileMdx(markdown);
     return {
-      markdown,
       compiled,
       data: postList[rawPost[0]],
     };
   } catch (e) {
     console.error(e);
     return {
-      markdown: null,
+      compiled: null,
       reason: e,
     };
   }
@@ -248,7 +246,6 @@ const Post = ({
   params: { slug: string };
   props: {
     data: PostType;
-    markdown: string;
     compiled: any;
     reason: string;
   };
@@ -263,9 +260,11 @@ const Post = ({
     origin: t,
   })) as any;
 
-  if (props.markdown === null) {
+  if (props.compiled === null) {
     return <>404</>;
   }
+
+  console.log(data);
 
   return (
     <>
@@ -295,7 +294,7 @@ const Post = ({
         </div>
         <div className="post-layer">
           <div className="post">
-            <img src={data.image} alt=""></img>
+            <img src={data.image} loading="lazy" alt="" id="thumbnail"></img>
             <p
               className="img-from"
               dangerouslySetInnerHTML={{ __html: data.img_from || '' }}
@@ -306,9 +305,11 @@ const Post = ({
             </main>
 
             <div className="other-posts">
-              <h4>#{data.tags[0]}의 다른 글</h4>
+              <h4>
+                #{data.tags[0]}의 다른 글 ({anotherPosts.length}개)
+              </h4>
               <div className="other-posts-container">
-                {anotherPosts.map((post) => (
+                {anotherPosts.slice(0, 5).map((post) => (
                   <>
                     <div className="other-post" key={post.title}>
                       <Link
@@ -331,7 +332,7 @@ const Post = ({
             <div className="footer">
               <div className="edit">
                 <a
-                  href={`https://github.com/do4ng/do4ng.github.io/edit/main/posts/${data.raw}`}
+                  href={`https://github.com/do4ng/do4ng.github.io/edit/main/posts/${data.date}.mdx`}
                 >
                   <i className="ri-edit-2-line"></i> Edit on Github
                 </a>

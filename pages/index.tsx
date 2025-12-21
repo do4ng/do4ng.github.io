@@ -31,7 +31,7 @@ const Home = ({}) => {
           (Number(page) + 1) * lengthPage
         );
 
-  const pages = Array(Math.floor(Object.keys(posts).length / lengthPage) + 1).fill(0);
+  const pages = Array(Math.floor(Object.keys(posts).length / lengthPage)).fill(0);
 
   return (
     <>
@@ -49,7 +49,11 @@ const Home = ({}) => {
                 preload={true}
               >
                 <div className="post-button">
-                  {data.image ? <Image src={data.image} alt="img"></Image> : <div></div>}
+                  {data.image ? (
+                    <Image src={data.image} alt="img"></Image>
+                  ) : (
+                    <Image src="/img/default.png" alt="img"></Image>
+                  )}
                   <div className="post-button-detail">
                     <h3>{data.title}</h3>
                     <div className="post-detail">{data.description}</div>
