@@ -8,6 +8,7 @@ import { Link } from 'exta/components';
 import { useEffect, useState } from 'react';
 
 import '../styles/global.scss';
+import { TopProgressBar } from '@/components/progress';
 
 function MyApp({ children }) {
   const [isScrolled, setScrolled] = useState(false);
@@ -25,6 +26,7 @@ function MyApp({ children }) {
 
   return (
     <>
+      <TopProgressBar></TopProgressBar>
       <div className={`header-container fixed${isScrolled ? ' scrolled' : ''}`}>
         <div className="header-bg">
           <div className={`header`}>
