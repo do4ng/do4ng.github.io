@@ -1,5 +1,5 @@
 import { Link } from 'exta/components';
-import posts from './post/posts.json';
+import posts from '../posts.json';
 
 export function removeArrayDup(arr: any[]) {
   let result = [];

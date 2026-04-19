@@ -1,4 +1,4 @@
-import { components } from '../pages/post/[slug]';
+import { components } from '../../pages/post/[slug]';
 import { runMdx } from './run';
 
 interface Props {

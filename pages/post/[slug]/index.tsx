@@ -4,13 +4,13 @@ import { Head, Link } from 'exta/components';
 
 import { useRef, useState } from 'react';
 
-import postList from './posts.json';
+import postList from '../../../posts.json';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
-import { Content } from '../../mdx/content';
-import { compileMdx } from '../../mdx/compile';
-import { LoadTags } from '../tag/[slug]';
+import { Content } from '../../../lib/mdx/content';
+import { compileMdx } from '../../../lib/mdx/compile';
+import { LoadTags } from '../../tag/[slug]';
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -84,7 +84,7 @@ export const components = {
                   onClick={() => {
                     const code =
                       ref.current.parentNode.parentNode.parentNode.querySelector(
-                        'code'
+                        'code',
                       ).innerText;
 
                     window.navigator.clipboard.writeText(code).then(() => {
@@ -122,7 +122,7 @@ export const components = {
               onClick={() => {
                 const code =
                   ref.current.parentNode.parentNode.parentNode.querySelector(
-                    'code'
+                    'code',
                   ).innerText;
 
                 window.navigator.clipboard.writeText(code).then(() => {
@@ -153,7 +153,7 @@ export const components = {
 
   a: (props: any) => {
     if (props.href.startsWith('http')) {
-      return <Link {...props} target="_blank" passHref={true}></Link>;
+      return <Link {...props} target="_blank"></Link>;
     }
 
     return (
@@ -222,7 +222,7 @@ export async function getStaticProps({ params }) {
     */
 
     const markdown = readFileSync(
-      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`)
+      join(process.cwd(), 'posts', `${postList[rawPost[0]].name}.mdx`),
     ).toString();
 
     const compiled = await compileMdx(markdown);
@@ -263,8 +263,6 @@ const Post = ({
   if (props.compiled === null) {
     return <>404</>;
   }
-
-  console.log(data);
 
   return (
     <>
@@ -310,22 +308,20 @@ const Post = ({
               </h4>
               <div className="other-posts-container">
                 {anotherPosts.slice(0, 5).map((post) => (
-                  <>
-                    <div className="other-post" key={post.title}>
-                      <Link
-                        className={
-                          (post as any).origin.toLowerCase() ===
-                          (slug as string).toLowerCase()
-                            ? 'active'
-                            : null
-                        }
-                        href={`/post/${(post as any).origin}`}
-                        prefetch={false}
-                      >
-                        {post.title}
-                      </Link>
-                    </div>
-                  </>
+                  <div className="other-post" key={post.title}>
+                    <Link
+                      className={
+                        (post as any).origin.toLowerCase() ===
+                        (slug as string).toLowerCase()
+                          ? 'active'
+                          : null
+                      }
+                      href={`/post/${(post as any).origin}`}
+                      prefetch={false}
+                    >
+                      {post.title}
+                    </Link>
+                  </div>
                 ))}
               </div>
             </div>
@@ -336,6 +332,12 @@ const Post = ({
                 >
                   <i className="ri-edit-2-line"></i> Edit on Github
                 </a>
+                <Link
+                  href={`/post/${slug}/edit`}
+                  style={{ textAlign: 'right', float: 'right' }}
+                >
+                  Edit this content
+                </Link>
               </div>
               <div className="back">
                 <Link href="/">Back to blog</Link>

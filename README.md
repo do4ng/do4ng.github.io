@@ -5,3 +5,8 @@
 ```bash
 git clone https://github.com/do4ng/do4ng.github.io.git my-blog
 ```
+
+## 사용한 것들
+
+- SSG - [exta](https://github.com/do4ng/exta)
+- Styling - [scss](https://github.com/sass)

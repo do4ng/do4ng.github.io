@@ -1,7 +1,7 @@
-import { compileMdx } from '../../mdx/compile';
+import { compileMdx } from '../../lib/mdx/compile';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { Content } from '../../mdx/content';
+import { Content } from '../../lib/mdx/content';
 
 export async function getStaticProps() {
   let markdown;
@@ -10,7 +10,7 @@ export async function getStaticProps() {
   } else {
     try {
       const res = await fetch(
-        `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${'0-hello'}.mdx`
+        `https://raw.githubusercontent.com/do4ng/do4ng.github.io/main/posts/${'0-hello'}.mdx`,
       );
       markdown = await res.text();
     } catch (e) {

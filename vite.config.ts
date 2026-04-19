@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react';
 import { writeFileSync } from 'fs';
 import path from 'node:path';
 
-import posts from './pages/post/posts.json';
+import posts from './posts.json';
+import { adminMiddleware } from './lib/admin';
 
 const baseURL = 'https://do4ng.vercel.app';
 
@@ -50,7 +51,7 @@ export function SitemapPlugin(baseURL: string): Plugin {
       const outPath = path.resolve(process.cwd(), 'dist', 'sitemap.xml');
       writeFileSync(outPath, sitemap.join('\n'), 'utf-8');
 
-      console.log(`✅ sitemap.xml generated at ${outPath}`);
+      console.log(`sitemap.xml generated at ${outPath}`);
     },
   };
 }
@@ -65,6 +66,13 @@ export default defineConfig({
     }),
 
     SitemapPlugin(baseURL),
+    adminMiddleware(),
   ],
+  define: {
+    'process.env.NODE_ENV': '"development"',
+  },
+  build: {
+    minify: false,
+  },
   publicDir: './public',
 });

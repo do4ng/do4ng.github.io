@@ -1,11 +1,11 @@
-import PostCard from '../../components/post-card';
-import rawPosts from '../post/posts.json';
+import PostCard from '../../lib/components/post-card';
+import rawPosts from '../../posts.json';
 import { removeArrayDup } from '../tags';
-import posts from '../post/posts.json';
+import posts from '../../posts.json';
 
 export const LoadTags = (slug: string | string[]) => {
   const posts = Object.keys(rawPosts).filter((post) =>
-    rawPosts[post].tags?.includes(slug as string)
+    rawPosts[post].tags?.includes(slug as string),
   );
 
   return posts;

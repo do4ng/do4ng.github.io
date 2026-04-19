@@ -2,8 +2,8 @@
 'use client';
 
 /* eslint-disable react-hooks/rules-of-hooks */
-import Posts from './post/posts.json';
-import PostCard from '../components/post-card';
+import Posts from '../posts.json';
+import PostCard from '../lib/components/post-card';
 import { cleanTitle } from './post/[slug]';
 
 import { Link, Image, Head } from 'exta/components';
@@ -23,12 +23,14 @@ const Home = ({}) => {
   const searchParams = useSearchQuery();
   const page = searchParams.get('page');
 
+  console.log(page);
+
   const showPosts =
     page === undefined
       ? Object.keys(posts).slice(-lengthPage)
       : Object.keys(posts).slice(
           Number(page) * lengthPage,
-          (Number(page) + 1) * lengthPage
+          (Number(page) + 1) * lengthPage,
         );
 
   const pages = Array(Math.floor(Object.keys(posts).length / lengthPage)).fill(0);

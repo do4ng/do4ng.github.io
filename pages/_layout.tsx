@@ -8,7 +8,7 @@ import { Link } from 'exta/components';
 import { useEffect, useState } from 'react';
 
 import '../styles/global.scss';
-import { TopProgressBar } from '@/components/progress';
+import { TopProgressBar } from '@/lib/components/progress';
 
 function MyApp({ children }) {
   const [isScrolled, setScrolled] = useState(false);

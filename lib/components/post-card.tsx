@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Link, Image } from 'exta/components';
-import { cleanTitle, PostType } from '../pages/post/[slug]';
+import { cleanTitle, PostType } from '../../pages/post/[slug]';
 
 export default function PostCard(props: { data: PostType; href: string }) {
   if (!props) return <></>;

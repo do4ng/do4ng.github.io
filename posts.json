@@ -1,16 +1,32 @@
 {
+  "sunung-d200": {
+    "name": "2026-04-19",
+    "title": "고3이다;;",
+    "date": "2026-04-19",
+    "description": "수능이 200일밖에 안남았다",
+    "tags": [
+      "수능",
+      "일기"
+    ]
+  },
   "about-ai-usage": {
     "name": "2025-12-22",
     "title": "AI 사용에 대해",
     "date": "2025-12-22",
-    "tags": ["note", "ai"],
+    "tags": [
+      "note",
+      "ai"
+    ],
     "description": "."
   },
   "backend-framework-v2": {
     "name": "2025-12-21",
     "title": "서버 프레임워크를 다시 만들었다.",
     "date": "2025-12-21",
-    "tags": ["dev", "backend"],
+    "tags": [
+      "dev",
+      "backend"
+    ],
     "description": "훨씬 빠름"
   },
   "making-ssg-framework-3": {
@@ -18,13 +34,21 @@
     "title": "정적 사이트 생성기를 만들었다.",
     "image": "/img/2025-09-03.png",
     "date": "2025-09-03",
-    "tags": ["javascript", "dev", "ssg"]
+    "tags": [
+      "javascript",
+      "dev",
+      "ssg"
+    ]
   },
   "making-ssg-framework-2": {
     "name": "2025-08-24",
     "title": "SSG 프레임워크 만들기 (2)",
     "date": "2025-08-24",
-    "tags": ["javascript", "dev", "ssg"],
+    "tags": [
+      "javascript",
+      "dev",
+      "ssg"
+    ],
     "image": "/img/2025-08-24.png",
     "description": "블로그에 적용해보았다"
   },
@@ -32,7 +56,11 @@
     "name": "2025-03-23",
     "title": "SSG 프레임워크 만들기",
     "date": "2025-08-22",
-    "tags": ["javascript", "dev", "ssg"],
+    "tags": [
+      "javascript",
+      "dev",
+      "ssg"
+    ],
     "image": "/assets/ssg.gif",
     "description": "기본 뼈대 만들기"
   },
@@ -40,7 +68,12 @@
     "name": "2025-01-19",
     "title": "번들러를 만들었다",
     "date": "2025-01-19",
-    "tags": ["javascript", "bundler", "dev", "serpack"],
+    "tags": [
+      "javascript",
+      "bundler",
+      "dev",
+      "serpack"
+    ],
     "description": "swc기반 번들러를 만들었다",
     "image": "/img/2025-01-19.png"
   },
@@ -48,7 +81,11 @@
     "name": "2024-07-24",
     "title": "번들된 파일에서 오류 추적하기",
     "date": "2024-07-24",
-    "tags": ["javascript", "testing", "dev"],
+    "tags": [
+      "javascript",
+      "testing",
+      "dev"
+    ],
     "description": "",
     "image": "/img/2024-07-24.png",
     "img_from": "bg from <a href=\"https://unsplash.com/\">Unsplash</a>에 있는 <a href=\"https://unsplash.com/ko/@boliviainteligente\">@BoliviaInteligente</a>의 사진"
@@ -57,7 +94,10 @@
     "name": "2023-11-23",
     "title": "새로운 문서",
     "date": "2023-11-23",
-    "tags": ["ui", "next"],
+    "tags": [
+      "ui",
+      "next"
+    ],
     "description": "vitepress에서 탈출하고 직접 문서 만들기",
     "image": "/assets/2023-11-23.png"
   },
@@ -65,7 +105,10 @@
     "name": "2023-10-07",
     "title": "Typescript에서 Javascript로 이주하기",
     "date": "2023-10-07",
-    "tags": ["typescript", "javascript"],
+    "tags": [
+      "typescript",
+      "javascript"
+    ],
     "description": "현재 Typescript의 문제점",
     "image": "/img/2023-10-07.png"
   },
@@ -73,7 +116,11 @@
     "name": "2023-09-30",
     "title": "나만의 프론트엔드 라이브러리 만들기 (2)",
     "date": "2023-09-30",
-    "tags": ["dev", "frontend", "javascript"],
+    "tags": [
+      "dev",
+      "frontend",
+      "javascript"
+    ],
     "description": "복붙완료",
     "image": "/img/2023-09-29.png"
   },
@@ -81,7 +128,11 @@
     "name": "2023-09-29",
     "title": "나만의 프론트엔드 라이브러리 만들기 (1)",
     "date": "2023-09-29",
-    "tags": ["dev", "frontend", "javascript"],
+    "tags": [
+      "dev",
+      "frontend",
+      "javascript"
+    ],
     "description": "짭엑트",
     "image": "/img/2023-09-29.png"
   },
@@ -89,7 +140,12 @@
     "name": "2023-09-28",
     "title": "npm 패키지",
     "date": "2023-09-28",
-    "tags": ["dev", "npm", "zely", "asto"],
+    "tags": [
+      "dev",
+      "npm",
+      "zely",
+      "asto"
+    ],
     "description": "만든 npm 패키지들",
     "image": "/img/2023-09-28.png"
   },
@@ -97,7 +153,9 @@
     "name": "2023-09-27",
     "title": "블로그 업데이트",
     "date": "2023-09-27",
-    "tags": ["blog"],
+    "tags": [
+      "blog"
+    ],
     "description": "별로 바뀐건 없다",
     "image": "/img/2023-09-27.png"
   },
@@ -105,7 +163,11 @@
     "name": "2023-02-09",
     "title": "React에 SSR 적용하기",
     "date": "2023-02-09",
-    "tags": ["frontend", "dev", "react"],
+    "tags": [
+      "frontend",
+      "dev",
+      "react"
+    ],
     "description": "next 따라하기",
     "image": "/img/2023-02-09.png"
   }
